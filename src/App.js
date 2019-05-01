@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import api from './api/init'
+import NewPost from './components/NewPost'
+import Post from './components/Post'
 
 
 class App extends Component {
   state = {
     newPostTitle: '',
     newPostBody: '',
-    id: '',
     posts: []
   }
 
@@ -67,13 +68,7 @@ class App extends Component {
         <br />
         <h2>Previous Posts</h2>
         { this.state.posts.map((post) => 
-          <div key={post._id}>
-            <h4>{ post.title }</h4>
-            <p>{ post.content }</p> 
-            <button onClick={() => {this.deletePost(post._id)}}>Delete Post</button>
-            <br />
-            <br />
-          </div> 
+          <Post key={post._id} {...post} deletePost={this.deletePost} />
         )}
       </div>
     )
