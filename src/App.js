@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios'
+import api from './api/init'
 
-const postsApi = 'http://localhost:3001/api/posts'
 
 class App extends Component {
   state = {
     newPostTitle: '',
     newPostBody: '',
+    id: '',
     posts: []
   }
 
   componentDidMount() {
-    axios.get(postsApi)
+    api.get('/posts')
       .then((response) => {
         this.setState({ posts: response.data })
+      }).catch((err) => {
+        console.log(`Something went wrong trying to fetch the
+        postings. Error: ${err}`)
       })
   }
 
@@ -32,13 +35,23 @@ class App extends Component {
 
   addPosts = (event) => {
     event.preventDefault()
-    axios.post(postsApi, { title: this.state.newPostTitle, content: this.state.newPostBody })
+    api.post('/posts', { title: this.state.newPostTitle, content: this.state.newPostBody })
       .then((response) => {
         const posts = [...this.state.posts, response.data]
         this.setState({ posts, newPostTitle: '', newPostBody: '' })
     }).catch(function (error) {
       console.log(error)
     })
+  }
+
+  deletePost = (id) => {
+    api.delete(`/posts/${id}`)
+    const index = this.state.posts.findIndex(post => post._id === id)
+    if (index >= 0) {
+      const posts = [...this.state.posts]
+      posts.splice(index, 1)
+      this.setState({ posts })
+    }
   }
 
   render() {
@@ -54,10 +67,12 @@ class App extends Component {
         <br />
         <h2>Previous Posts</h2>
         { this.state.posts.map((post) => 
-          <div>
+          <div key={post._id}>
             <h4>{ post.title }</h4>
             <p>{ post.content }</p> 
-            <br /> 
+            <button onClick={() => {this.deletePost(post._id)}}>Delete Post</button>
+            <br />
+            <br />
           </div> 
         )}
       </div>
