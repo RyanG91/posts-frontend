@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
-import api from './api/init'
+import { api, setJwt} from './api/init'
 import NewPost from './components/NewPost'
 import Signin from './components/Signin'
 import Notfound from './components/Notfound'
@@ -37,6 +37,31 @@ class App extends Component {
     })
   }
 
+  handleSignIn = async (event) => {
+    // try {
+    //   event.preventDefault()
+    //   const form = event.target
+    //   const response = await api.post('/auth/login', {
+    //     email: form.elements.email.value,
+    //     password: form.elements.password.value
+    //   })
+    //   this.token = response.data.token
+    //   setJwt(response.data.token)
+    //   store.dispatch(setLoggedInAction(true))
+    //   this.fetchBookmarks()
+    // } catch (error) {
+    //   store.dispatch(setLoginErrorAction(error.message))
+    // }
+  }
+
+  handleSignOut = (event) => {
+    // api.get('/auth/logout').then(() => {
+    //   localStorage.removeItem('token')
+    //   store.dispatch(setLoggedInAction(false))
+    //   store.dispatch(setBookmarksAction([]))
+    // })
+  }
+
   addPosts = (event) => {
     event.preventDefault()
     api.post('/posts', { title: this.state.newPostTitle, content: this.state.newPostBody })
@@ -62,22 +87,35 @@ class App extends Component {
     return (
       <div>
         <Router>
-          {/* <Route exact path="/login" component={Signin} /> */}
+          <Fragment>
+            <Route exact path="/" render={(props) => (
+              <Redirect to="/login" />
+            )} />
+
+            <Route exact path="/login" component={Signin} />
+
+            <Route exact path="/postings" render={() =>  (
+              <Fragment>
+                <h1>Posting</h1>
+                <h2>New Post</h2>
+                <form onSubmit={this.addPosts}>
+                  <label>Title:</label><br /><input onChange={this.updateNewPostTitle} /><br />
+                  <label>Content:</label><br /><input onChange={this.updateNewPostBody} /><br />
+                  <input type="submit" value="Submit" />
+                </form>
+                <br />
+                <h2>Previous Posts</h2>
+                { this.state.posts.map((post) => 
+                  <Post key={post._id} {...post} deletePost={this.deletePost} />
+                )}
+              </Fragment>
+            )} />
+
+          </Fragment>
 
           {/* <Route component={Notfound} /> */}
 
-          <h1>Posting</h1>
-          <h2>New Post</h2>
-          <form onSubmit={this.addPosts}>
-            <label>Title:</label><br /><input onChange={this.updateNewPostTitle} /><br />
-            <label>Content:</label><br /><input onChange={this.updateNewPostBody} /><br />
-            <input type="submit" value="Submit" />
-          </form>
-          <br />
-          <h2>Previous Posts</h2>
-          { this.state.posts.map((post) => 
-            <Post key={post._id} {...post} deletePost={this.deletePost} />
-          )}
+
         </Router>
       </div>
     )
