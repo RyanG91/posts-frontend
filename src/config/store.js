@@ -18,7 +18,7 @@ const reducer = (state, action) => {
     case 'set_newPostTitle':
       return { ...state, newPostTitle: action.newPostTitle }
     case 'set_newPostBody':
-      return { ...state, newPostBody: action.newPostTitle }
+      return { ...state, newPostBody: action.newPostBody }
     default:
       console.log(`Redux reducer: Action ${action.type} does not exist`)
       return state
