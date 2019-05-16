@@ -6,33 +6,38 @@ import Signin from './components/Signin'
 import Notfound from './components/Notfound'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import Post from './components/Post'
+import store from './config/store'
 
 
 class App extends Component {
-  state = {
-    newPostTitle: '',
-    newPostBody: '',
-    posts: []
-  }
+  // state = {
+  //   newPostTitle: '',
+  //   newPostBody: '',
+  //   posts: []
+  // }
 
-  componentDidMount() {
-    api.get('/posts')
-      .then((response) => {
-        this.setState({ posts: response.data })
-      }).catch((err) => {
-        console.log(`Something went wrong trying to fetch the
-        postings. Error: ${err}`)
-      })
-  }
+  // componentDidMount() {
+  //   api.get('/posts')
+  //     .then((response) => {
+  //       this.setState({ posts: response.data })
+  //     }).catch((err) => {
+  //       console.log(`Something went wrong trying to fetch the
+  //       postings. Error: ${err}`)
+  //     })
+  // }
 
   updateNewPostTitle = (event) => {
-    this.setState({
+    // this.setState({
+    store.dispatch({
+      type: 'set_newPostTitle',
       newPostTitle: event.target.value
     })
   }
 
   updateNewPostBody = (event) => {
-    this.setState({
+    // this.setState({
+    store.dispatch({
+      type: 'set_newPostBody',
       newPostBody: event.target.value
     })
   }
@@ -64,10 +69,13 @@ class App extends Component {
 
   addPosts = (event) => {
     event.preventDefault()
-    api.post('/posts', { title: this.state.newPostTitle, content: this.state.newPostBody })
+    // api.post('/posts', { title: this.state.newPostTitle, content: this.state.newPostBody })
+    api.post('/posts', { title: store.getState().newPostTitle, content: store.getState().newPostBody })
       .then((response) => {
-        const posts = [...this.state.posts, response.data]
-        this.setState({ posts, newPostTitle: '', newPostBody: '' })
+        // const posts = [...this.state.posts, response.data]
+        const posts = [...store.getState().posts, response.data]
+        // this.setState({ posts, newPostTitle: '', newPostBody: '' })
+        store.dispatch({ type: 'set_posts', posts, newPostTitle: '', newPostBody: '' })
     }).catch(function (error) {
       console.log(error)
     })
@@ -75,15 +83,20 @@ class App extends Component {
 
   deletePost = (id) => {
     api.delete(`/posts/${id}`)
-    const index = this.state.posts.findIndex(post => post._id === id)
+    // const index = this.state.posts.findIndex(post => post._id === id)
+    const index = store.getState().posts.findIndex(post => post._id === id)
     if (index >= 0) {
-      const posts = [...this.state.posts]
+      // const posts = [...this.state.posts]
+      const posts = [...store.getState().posts]
       posts.splice(index, 1)
-      this.setState({ posts })
+      // this.setState({ posts })
+      store.dispatch({ type: 'set_posts', posts: posts })
     }
   }
 
   render() {
+    console.log(store.getState())
+    const { posts } = store.getState()
     return (
       <div>
         <Router>
@@ -105,7 +118,8 @@ class App extends Component {
                 </form>
                 <br />
                 <h2>Previous Posts</h2>
-                { this.state.posts.map((post) => 
+                {/* { this.state.posts.map((post) =>  */}
+                { posts.map((post) => 
                   <Post key={post._id} {...post} deletePost={this.deletePost} />
                 )}
               </Fragment>
@@ -119,6 +133,24 @@ class App extends Component {
         </Router>
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.fetchPostings()
+  }
+
+  async fetchPostings() {
+    try {
+      const posts = await api.get('/posts')
+      // this.setState({ posts: posts.data})
+      // Dispatch a set_posts action to Redux
+      store.dispatch({ 
+        type: 'set_posts',
+        posts: posts.data
+      })
+    } catch(error) {
+      alert("Can't get postings!")
+    }
   }
 }
 
