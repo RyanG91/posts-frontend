@@ -16,7 +16,9 @@ import deletePosts from './storeMethods'
 const initialState = {
   posts: [],
   newPostTitle: '',
-  newPostBody: ''
+  newPostBody: '',
+  loggedIn: false,
+  loginError: null
 }
 
 // Define reducers
@@ -28,6 +30,11 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'set_posts':
       return { ...state, posts: action.posts }
+    case 'set_loginError':
+      return { ...state, loginError: action.loginError }
+    case 'set_loggedIn':
+      return { ...state, loggedIn: action.loggedIn }
+
     case 'set_newPostTitle':
       return { ...state, newPostTitle: action.newPostTitle }
     case 'set_newPostBody':

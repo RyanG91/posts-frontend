@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 import { api, setJwt} from './api/init'
+import decodeJWT from 'jwt-decode'
 import NewPost from './components/NewPost'
 import Signin from './components/Signin'
 import Notfound from './components/Notfound'
@@ -10,24 +11,16 @@ import store from './config/store'
 
 
 class App extends Component {
-  // state = {
-  //   newPostTitle: '',
-  //   newPostBody: '',
-  //   posts: []
-  // }
 
-  // componentDidMount() {
-  //   api.get('/posts')
-  //     .then((response) => {
-  //       this.setState({ posts: response.data })
-  //     }).catch((err) => {
-  //       console.log(`Something went wrong trying to fetch the
-  //       postings. Error: ${err}`)
-  //     })
-  // }
+  get token() {
+    return localStorage.getItem('token')
+  }
+
+  set token(value) {
+    localStorage.setItem('token', value)
+  }
 
   updateNewPostTitle = (event) => {
-    // this.setState({
     store.dispatch({
       type: 'set_newPostTitle',
       newPostTitle: event.target.value
@@ -35,36 +28,37 @@ class App extends Component {
   }
 
   updateNewPostBody = (event) => {
-    // this.setState({
     store.dispatch({
       type: 'set_newPostBody',
       newPostBody: event.target.value
     })
   }
 
+  // Handles signin function
   handleSignIn = async (event) => {
-    // try {
-    //   event.preventDefault()
-    //   const form = event.target
-    //   const response = await api.post('/auth/login', {
-    //     email: form.elements.email.value,
-    //     password: form.elements.password.value
-    //   })
-    //   this.token = response.data.token
-    //   setJwt(response.data.token)
-    //   store.dispatch(setLoggedInAction(true))
-    //   this.fetchBookmarks()
-    // } catch (error) {
-    //   store.dispatch(setLoginErrorAction(error.message))
-    // }
+    try {
+      event.preventDefault()
+      const form = event.target
+      const response = await api.post('/users/login', {
+        email: form.elements.email.value,
+        password: form.elements.password.value
+      })
+      // Returns token from backend
+      this.token = response.data.token
+      setJwt(response.data.token)
+      store.dispatch({ type: 'set_loggedIn', loggedIn: true})
+      this.fetchPostings()
+    } catch (error) {
+      store.dispatch({ type: 'set_loginError', loginError: 'Invalid email or password' }) // error.message
+    }
   }
 
   handleSignOut = (event) => {
-    // api.get('/auth/logout').then(() => {
-    //   localStorage.removeItem('token')
-    //   store.dispatch(setLoggedInAction(false))
-    //   store.dispatch(setBookmarksAction([]))
-    // })
+    api.get('/users/logout').then(() => {
+      localStorage.removeItem('token')
+      store.dispatch({ type: 'set_loggedIn', loggedIn: false})
+      store.dispatch({ type: 'set_posts', posts: [] })
+    })
   }
 
   addPosts = (event) => {
@@ -93,7 +87,8 @@ class App extends Component {
 
   render() {
     console.log(store.getState())
-    const { posts } = store.getState()
+    const tokenDetails = this.token && decodeJWT(this.token)
+    const { posts, loggedIn } = store.getState()
     return (
       <div>
         <Router>
@@ -102,25 +97,39 @@ class App extends Component {
               <Redirect to="/login" />
             )} />
 
-            <Route exact path="/login" component={Signin} />
+            <Route exact path="/login" render={(props) => {
+              if (this.token) {
+                return (<Redirect to="/postings" />)
+              } else {
+                return (<Signin loginError={store.getState().loginError} handleSignIn={this.handleSignIn} />)
+              }
+            }} />
 
             <Route exact path="/postings" render={() =>  (
-              <Fragment>
-                <h1>Posting</h1>
-                <h2>New Post</h2>
-                <form onSubmit={this.addPosts}>
-                  <label>Title:</label><br /><input onChange={this.updateNewPostTitle} /><br />
-                  <label>Content:</label><br /><input onChange={this.updateNewPostBody} /><br />
-                  <input type="submit" value="Submit" />
-                </form>
-                <br />
-                <h2>Previous Posts</h2>
-                {/* { this.state.posts.map((post) =>  */}
-                { posts.map((post) => 
-                  // <Post key={post._id} {...post} deletePost={this.deletePost} />
-                  <Post key={post._id} {...post} />
-                )}
-              </Fragment>
+              this.token ? (
+                <Fragment>
+                  <h4>Welcome {tokenDetails.email}!</h4>
+                  <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p>
+                  <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p>
+                  <button onClick={this.handleSignOut}>Logout</button>
+                  <h1>Posting</h1>
+                  <h2>New Post</h2>
+                  <form onSubmit={this.addPosts}>
+                    <label>Title:</label><br /><input onChange={this.updateNewPostTitle} /><br />
+                    <label>Content:</label><br /><input onChange={this.updateNewPostBody} /><br />
+                    <input type="submit" value="Submit" />
+                  </form>
+                  <br />
+                  <h2>Previous Posts</h2>
+                  {/* { this.state.posts.map((post) =>  */}
+                  { posts.map((post) => 
+                    // <Post key={post._id} {...post} deletePost={this.deletePost} />
+                    <Post key={post._id} {...post} />
+                  )}
+                </Fragment>
+              ) : (
+                <Redirect to="/login" />
+              )
             )} />
 
           </Fragment>
@@ -132,7 +141,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchPostings()
+    if (this.token) {
+      setJwt(this.token)
+      this.fetchPostings()
+    }
   }
 
   async fetchPostings() {
