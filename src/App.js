@@ -128,8 +128,6 @@ class App extends Component {
           </Fragment>
 
           {/* <Route component={Notfound} /> */}
-
-
         </Router>
       </div>
     )

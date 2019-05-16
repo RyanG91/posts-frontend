@@ -15,6 +15,10 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'set_posts':
       return { ...state, posts: action.posts }
+    case 'set_newPostTitle':
+      return { ...state, newPostTitle: action.newPostTitle }
+    case 'set_newPostBody':
+      return { ...state, newPostBody: action.newPostBody }
     default:
       console.log(`Redux reducer: Action ${action.type} does not exist`)
       return state
