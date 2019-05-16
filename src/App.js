@@ -83,13 +83,10 @@ class App extends Component {
 
   deletePost = (id) => {
     api.delete(`/posts/${id}`)
-    // const index = this.state.posts.findIndex(post => post._id === id)
     const index = store.getState().posts.findIndex(post => post._id === id)
     if (index >= 0) {
-      // const posts = [...this.state.posts]
       const posts = [...store.getState().posts]
       posts.splice(index, 1)
-      // this.setState({ posts })
       store.dispatch({ type: 'set_posts', posts: posts })
     }
   }
@@ -120,7 +117,8 @@ class App extends Component {
                 <h2>Previous Posts</h2>
                 {/* { this.state.posts.map((post) =>  */}
                 { posts.map((post) => 
-                  <Post key={post._id} {...post} deletePost={this.deletePost} />
+                  // <Post key={post._id} {...post} deletePost={this.deletePost} />
+                  <Post key={post._id} {...post} />
                 )}
               </Fragment>
             )} />
@@ -128,8 +126,6 @@ class App extends Component {
           </Fragment>
 
           {/* <Route component={Notfound} /> */}
-
-
         </Router>
       </div>
     )
