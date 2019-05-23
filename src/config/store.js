@@ -1,17 +1,5 @@
 import { createStore } from 'redux'
-// import { api } from '../api/init'
 import deletePosts from './storeMethods'
-
-// const deletePosts = (state, action) => {
-//   api.delete(`/posts/${action.id}`)
-//   const index = state.posts.findIndex(post => post._id === action.id)
-//   if (index >= 0) {
-//     const newPosts = [...state.posts]
-//     newPosts.splice(index, 1)
-//     return { ...state, posts: newPosts }
-//   }
-//   return state
-// }
 
 const initialState = {
   posts: [],

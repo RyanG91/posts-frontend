@@ -75,6 +75,7 @@ class App extends Component {
     })
   }
 
+  // Moved to storeMethods
   // deletePost = (id) => {
   //   api.delete(`/posts/${id}`)
   //   const index = store.getState().posts.findIndex(post => post._id === id)
@@ -90,7 +91,7 @@ class App extends Component {
     const tokenDetails = this.token && decodeJWT(this.token)
     const { posts, loggedIn } = store.getState()
     return (
-      <div>
+      <div className="App">
         <Router>
           <Fragment>
             <Route exact path="/" render={(props) => (
@@ -121,11 +122,9 @@ class App extends Component {
                   </form>
                   <br />
                   <h2>Previous Posts</h2>
-                  {/* { this.state.posts.map((post) =>  */}
                   { posts.map((post) => 
-                    // <Post key={post._id} {...post} deletePost={this.deletePost} />
                     <Post key={post._id} {...post} />
-                  )}
+                  ).reverse()}
                 </Fragment>
               ) : (
                 <Redirect to="/login" />
