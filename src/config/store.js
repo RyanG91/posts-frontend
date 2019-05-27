@@ -6,7 +6,8 @@ const initialState = {
   newPostTitle: '',
   newPostBody: '',
   loggedIn: false,
-  loginError: null
+  loginError: null,
+  editing: null
 }
 
 // Define reducers
@@ -29,6 +30,8 @@ const reducer = (state, action) => {
       return { ...state, newPostBody: action.newPostBody }
     case 'delete_postings':
       return deletePosts(state, action)
+    case "set_editing":
+      return { ...state, editing: action.editing }
     default:
       console.log(`Redux reducer: Action ${action.type} does not exist`)
       return state

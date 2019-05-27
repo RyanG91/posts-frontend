@@ -8,6 +8,7 @@ import Notfound from './components/Notfound'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import Post from './components/Post'
 import store from './config/store'
+import EditPostForm from './components/EditPostForm';
 
 
 class App extends Component {
@@ -106,31 +107,40 @@ class App extends Component {
               }
             }} />
 
-            <Route exact path="/postings" render={() =>  (
-              this.token ? (
-                <Fragment>
-                  <h4>Welcome {tokenDetails.email}!</h4>
-                  <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p>
-                  <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p>
-                  <button onClick={this.handleSignOut}>Logout</button>
-                  <h1>Posting</h1>
-                  <h2>New Post</h2>
-                  <form onSubmit={this.addPosts}>
-                    <label>Title:</label><br /><input onChange={this.updateNewPostTitle} /><br />
-                    <label>Content:</label><br /><input onChange={this.updateNewPostBody} /><br />
-                    <input type="submit" value="Submit" />
-                  </form>
-                  <br />
-                  <h2>Previous Posts</h2>
-                  { posts.map((post) => 
-                    <Post key={post._id} {...post} />
-                  ).reverse()}
-                </Fragment>
-              ) : (
-                <Redirect to="/login" />
-              )
-            )} />
-
+            <Route exact path="/postings" render={() =>  {
+              if (this.token) {
+                if (store.getState().editing) {
+                  let post = store.getState().editing
+                  return (
+                    <EditPostForm key={post._id} post={post} />
+                  )
+                } else {
+                  return (
+                    <Fragment>
+                      <h4>Welcome {tokenDetails.email}!</h4>
+                      <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p>
+                      <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p>
+                      <button onClick={this.handleSignOut}>Logout</button>
+                      <h1>Posting</h1>
+                      <h2>New Post</h2>
+                      <form onSubmit={this.addPosts}>
+                        <label>Title:</label><br /><input onChange={this.updateNewPostTitle} /><br />
+                        <label>Content:</label><br /><input onChange={this.updateNewPostBody} /><br />
+                        <input type="submit" value="Submit" />
+                      </form>
+                      <br />
+                      <h2>Previous Posts</h2>
+                      { posts.map((post) => 
+                        <Post key={post._id} {...post} />
+                      ).reverse()}
+                    </Fragment>
+                  )
+                }
+              } else {
+                return <Redirect to="/login" />
+              }
+            }} 
+          />
           </Fragment>
 
           {/* <Route component={Notfound} /> */}
