@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import Post from './components/Post'
 import store from './config/store'
 import EditPostForm from './components/EditPostForm';
+import { setEditingAction } from './config/actions'
 
 
 class App extends Component {
@@ -62,6 +63,24 @@ class App extends Component {
     })
   }
 
+  edit = (event) => {
+    event.preventDefault()
+    const form = event.target
+    api
+      .put(`/posts/${form.elements.id.value}`, {
+        _id: form.elements.id.value,
+        title: form.elements.title.value,
+        content: form.elements.content.value
+      })
+      .then(res => {
+        this.fetchPostings()
+        store.dispatch(setEditingAction(null))
+      })
+      .catch(error => {
+        console.error(`Error updating post: ${error}`)
+      })
+  }
+
   addPosts = (event) => {
     event.preventDefault()
     // api.post('/posts', { title: this.state.newPostTitle, content: this.state.newPostBody })
@@ -111,8 +130,9 @@ class App extends Component {
               if (this.token) {
                 if (store.getState().editing) {
                   let post = store.getState().editing
+                  // console.log(`in app post: ${post._id}`)
                   return (
-                    <EditPostForm key={post._id} post={post} />
+                    <EditPostForm key={post._id} post={post} edit={this.edit} />
                   )
                 } else {
                   return (
