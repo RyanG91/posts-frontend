@@ -1,4 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Posts
+
+This is a mern stack app as a CRUD and built as a twitter like app.
+
+The current repo serves as the front-end part of the app and
+is designed using React. 
+
+The backend can be found at: https://github.com/RyanG91/posts
+
+### Current features:
+* Create posts
+* Delete posts
+* Edit posts
+* Login required
+
+### Future features:
+* Likes counter
+* Dislikes counter
+* Author of posts
+* Time posts were created
 
 ## Available Scripts
 
@@ -66,3 +85,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
