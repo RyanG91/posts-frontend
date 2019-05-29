@@ -8,7 +8,7 @@ const api = axios.create({
 // Axios will then add this to the HTTP header
 // with every subsequent request
 const setJwt = (token) => {
-  api.defaults.headers.common['Authorization'] = `Beaer ${token}`
+  api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }
 
 export { api, setJwt }
