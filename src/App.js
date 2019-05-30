@@ -88,14 +88,22 @@ class App extends Component {
 
   addPosts = (event) => {
     event.preventDefault()
+    const form = event.target
     // api.post('/posts', { title: this.state.newPostTitle, content: this.state.newPostBody })
-    api.post('/posts', { title: store.getState().newPostTitle, content: store.getState().newPostBody })
-      .then((response) => {
+    api.post('/posts', { 
+      title: store.getState().newPostTitle,
+      content: store.getState().newPostBody
+    })
+    .then((response) => {
         // const posts = [...this.state.posts, response.data]
         const posts = [...store.getState().posts, response.data]
         // this.setState({ posts, newPostTitle: '', newPostBody: '' })
         store.dispatch({ type: 'set_posts', posts, newPostTitle: '', newPostBody: '' })
-    }).catch(function (error) {
+        this.fetchPostings()
+        form.elements.title.value = ""
+        form.elements.content.value = ""
+    })
+    .catch(function (error) {
       console.log(error)
     })
   }
