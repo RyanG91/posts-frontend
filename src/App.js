@@ -147,12 +147,15 @@ class App extends Component {
                       <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p>
                       <button onClick={this.handleSignOut}>Logout</button>
                       <h1>Posting</h1>
-                      <h2>New Post</h2>
+                      <NewPost 
+                        addPosts={this.addPosts} updateNewPostTitle={this.updateNewPostTitle} updateNewPostBody={this.updateNewPostBody}
+                      />
+                      {/* <h2>New Post</h2>
                       <form onSubmit={this.addPosts}>
                         <label>Title:</label><br /><input onChange={this.updateNewPostTitle} /><br />
                         <label>Content:</label><br /><input onChange={this.updateNewPostBody} /><br />
                         <input type="submit" value="Submit" />
-                      </form>
+                      </form> */}
                       <br />
                       <h2>Previous Posts</h2>
                       { posts.map((post) => 
@@ -168,7 +171,7 @@ class App extends Component {
           />
           </Fragment>
 
-          {/* <Route component={Notfound} /> */}
+          <Route component={Notfound} />
         </Router>
       </div>
     )
