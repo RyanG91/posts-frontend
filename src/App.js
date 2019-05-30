@@ -63,7 +63,12 @@ class App extends Component {
     })
   }
 
-  edit = (event) => {
+  removeEdit = () => {
+    this.fetchPostings()
+    store.dispatch(setEditingAction(null))
+  }
+
+  editPosts = (event) => {
     event.preventDefault()
     const form = event.target
     api
@@ -132,7 +137,7 @@ class App extends Component {
                   let post = store.getState().editing
                   // console.log(`in app post: ${post._id}`)
                   return (
-                    <EditPostForm key={post._id} post={post} edit={this.edit} />
+                    <EditPostForm key={post._id} post={post} editPosts={this.editPosts} removeEdit={this.removeEdit} />
                   )
                 } else {
                   return (
