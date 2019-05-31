@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import './App.css';
+import './styles/App.css';
 import { api, setJwt} from './api/init'
 import decodeJWT from 'jwt-decode'
 import NewPost from './components/NewPost'
@@ -179,7 +179,7 @@ class App extends Component {
           />
           </Fragment>
 
-          <Route component={Notfound} />
+          {/* <Route component={Notfound} /> */}
         </Router>
       </div>
     )

@@ -15,6 +15,7 @@ The backend can be found at: https://github.com/RyanG91/posts.
 * Delete posts
 * Edit posts
 * Login required
+* Styling
 
 ### Future features:
 * Likes counter
@@ -22,6 +23,7 @@ The backend can be found at: https://github.com/RyanG91/posts.
 * Author of posts
 * Time posts were created
 * Tests
+* Further styling
 * Potential deployment (Database is currently local)
 
 These future features may change over time if they are implemented and
