@@ -7,7 +7,7 @@ function Post (props) {
   const { _id, title, content, deletePost} = props
   return (
     <div className="post">
-      <h4>{ title }</h4>
+      <h4 className="postTitle">{ title }</h4>
       <p>{ content }</p>
       <button className="editButton" onClick={() => store.dispatch(setEditingAction(props))}>Edit Post</button>
       <button className="deleteButton" onClick={ () => store.dispatch({ type: 'delete_postings', id: _id }) }>Delete Post</button>

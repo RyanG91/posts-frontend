@@ -150,13 +150,13 @@ class App extends Component {
                 } else {
                   return (
                     <Fragment>
+                      <h1 className="mainTitle">Posting</h1>
                       <div>
                         <h4>Welcome {tokenDetails.email}!</h4>
                         <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p>
                         <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p>
-                        <button onClick={this.handleSignOut}>Logout</button>
+                        <button className="logoutButton" onClick={this.handleSignOut}>Logout</button>
                       </div>
-                      <h1 className="mainTitle">Posting</h1>
                       <NewPost 
                         addPosts={this.addPosts} updateNewPostTitle={this.updateNewPostTitle} updateNewPostBody={this.updateNewPostBody}
                       />
