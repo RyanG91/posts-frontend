@@ -1,0 +1,31 @@
+.newPost {
+  word-wrap: break-word;
+}
+
+.mainTitle {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.createPost {
+  border-radius: 28px;
+  padding: 15px 32px;
+  background-color: #2E0854;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.createPost:hover {
+  background-color: #9B30FF;
+}
+
+.titleBox {
+  width: 40%;
+  border-color: #9B30FF;
+}
+
+.contentBox {
+  width: 40%;
+  height: 60px;
+  border-color: #9B30FF;
+}
