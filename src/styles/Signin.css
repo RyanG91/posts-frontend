@@ -21,6 +21,7 @@
 }
 
 .details {
+  border-collapse: separate;
   border-radius: 28px;
   width: 30%;
   padding: 6px 5px;

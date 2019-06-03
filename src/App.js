@@ -151,13 +151,13 @@ class App extends Component {
                   } else {
                     return (
                       <Fragment>
-                        <h1 className="mainTitle">Posting</h1>
                         <div>
                           <h4>Currently logged in as {tokenDetails.email}!</h4>
-                          <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p>
-                          <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p>
+                          {/* <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p> */}
+                          {/* <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p> */}
                           <button className="logoutButton" onClick={this.handleSignOut}>Logout</button>
                         </div>
+                        <h1 className="mainTitle">Posting</h1>
                         <NewPost 
                           addPosts={this.addPosts} updateNewPostTitle={this.updateNewPostTitle} updateNewPostBody={this.updateNewPostBody}
                         />
@@ -168,6 +168,8 @@ class App extends Component {
                           <input type="submit" value="Submit" />
                         </form> */}
                         <br />
+                        <br />
+
                         <h2 className="mainTitle">Previous Posts</h2>
                         { posts.map((post) => 
                           <Post key={post._id} {...post} />
