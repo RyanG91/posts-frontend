@@ -125,64 +125,66 @@ class App extends Component {
     const { posts, loggedIn } = store.getState()
     return (
       <div className="App">
-        <Router>
-          <Fragment>
-            <Route exact path="/" render={(props) => (
-              <Redirect to="/login" />
-            )} />
+        <div className="Posting">
+          <Router>
+            <Fragment>
+              <Route exact path="/" render={(props) => (
+                <Redirect to="/login" />
+              )} />
 
-            <Route exact path="/login" render={(props) => {
-              if (this.token) {
-                return (<Redirect to="/postings" />)
-              } else {
-                return (<Signin loginError={store.getState().loginError} handleSignIn={this.handleSignIn} />)
-              }
-            }} />
-
-            <Route exact path="/postings" render={() =>  {
-              if (this.token) {
-                if (store.getState().editing) {
-                  let post = store.getState().editing
-                  // console.log(`in app post: ${post._id}`)
-                  return (
-                    <EditPostForm key={post._id} post={post} editPosts={this.editPosts} removeEdit={this.removeEdit} />
-                  )
+              <Route exact path="/login" render={(props) => {
+                if (this.token) {
+                  return (<Redirect to="/postings" />)
                 } else {
-                  return (
-                    <Fragment>
-                      <h1 className="mainTitle">Posting</h1>
-                      <div>
-                        <h4>Currently logged in as {tokenDetails.email}!</h4>
-                        <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p>
-                        <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p>
-                        <button className="logoutButton" onClick={this.handleSignOut}>Logout</button>
-                      </div>
-                      <NewPost 
-                        addPosts={this.addPosts} updateNewPostTitle={this.updateNewPostTitle} updateNewPostBody={this.updateNewPostBody}
-                      />
-                      {/* <h2>New Post</h2>
-                      <form onSubmit={this.addPosts}>
-                        <label>Title:</label><br /><input onChange={this.updateNewPostTitle} /><br />
-                        <label>Content:</label><br /><input onChange={this.updateNewPostBody} /><br />
-                        <input type="submit" value="Submit" />
-                      </form> */}
-                      <br />
-                      <h2 className="mainTitle">Previous Posts</h2>
-                      { posts.map((post) => 
-                        <Post key={post._id} {...post} />
-                      ).reverse()}
-                    </Fragment>
-                  )
+                  return (<Signin loginError={store.getState().loginError} handleSignIn={this.handleSignIn} />)
                 }
-              } else {
-                return <Redirect to="/login" />
-              }
-            }} 
-          />
-          </Fragment>
+              }} />
 
-          {/* <Route component={Notfound} /> */}
-        </Router>
+              <Route exact path="/postings" render={() =>  {
+                if (this.token) {
+                  if (store.getState().editing) {
+                    let post = store.getState().editing
+                    // console.log(`in app post: ${post._id}`)
+                    return (
+                      <EditPostForm key={post._id} post={post} editPosts={this.editPosts} removeEdit={this.removeEdit} />
+                    )
+                  } else {
+                    return (
+                      <Fragment>
+                        <h1 className="mainTitle">Posting</h1>
+                        <div>
+                          <h4>Currently logged in as {tokenDetails.email}!</h4>
+                          <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p>
+                          <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p>
+                          <button className="logoutButton" onClick={this.handleSignOut}>Logout</button>
+                        </div>
+                        <NewPost 
+                          addPosts={this.addPosts} updateNewPostTitle={this.updateNewPostTitle} updateNewPostBody={this.updateNewPostBody}
+                        />
+                        {/* <h2>New Post</h2>
+                        <form onSubmit={this.addPosts}>
+                          <label>Title:</label><br /><input onChange={this.updateNewPostTitle} /><br />
+                          <label>Content:</label><br /><input onChange={this.updateNewPostBody} /><br />
+                          <input type="submit" value="Submit" />
+                        </form> */}
+                        <br />
+                        <h2 className="mainTitle">Previous Posts</h2>
+                        { posts.map((post) => 
+                          <Post key={post._id} {...post} />
+                        ).reverse()}
+                      </Fragment>
+                    )
+                  }
+                } else {
+                  return <Redirect to="/login" />
+                }
+              }} 
+            />
+            </Fragment>
+
+            {/* <Route component={Notfound} /> */}
+          </Router>
+        </div>
       </div>
     )
   }
