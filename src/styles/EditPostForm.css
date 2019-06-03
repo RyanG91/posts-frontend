@@ -1,0 +1,39 @@
+.editBackground {
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 2%;
+  background-color: #2E0854;
+}
+
+.editPostForm {
+  background-color: white;
+  padding-top: 3%;
+  padding-bottom: 5%;
+}
+
+.titleBox {
+  width: 40%;
+  border-color: #9B30FF;
+}
+
+.contentBox {
+  width: 40%;
+  height: 60px;
+  border-color: #9B30FF;
+}
+
+.createPost {
+  border-radius: 28px;
+  padding: 8px 20px;
+  background-color: #2E0854;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  transition-duration: 0.4s;
+}
+
+
+.createPost:hover {
+  background-color: white;
+  border-color: #2E0854;
+  color: black;
+}

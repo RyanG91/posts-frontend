@@ -152,7 +152,7 @@ class App extends Component {
                     <Fragment>
                       <h1 className="mainTitle">Posting</h1>
                       <div>
-                        <h4>Welcome {tokenDetails.email}!</h4>
+                        <h4>Currently logged in as {tokenDetails.email}!</h4>
                         <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p>
                         <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p>
                         <button className="logoutButton" onClick={this.handleSignOut}>Logout</button>
