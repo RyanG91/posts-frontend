@@ -1,12 +1,21 @@
-/* .post {
-  border-style: dashed;
-  border-color: grey;
-} */
+.post {
+  /* border-style: dashed;
+  border-color: grey; */
+  background-color: white;
+}
+
+.postTitle {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.postContent {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .deleteButton {
   border-radius: 28px;
   padding: 8px 20px;
-  background-color: red;
+  background-color: darkred;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   transition-duration: 0.4s;
@@ -14,7 +23,7 @@
 
 .deleteButton:hover {
   background-color: white;
-  border-color: red;
+  border-color: darkred;
   color: black;
 }
 

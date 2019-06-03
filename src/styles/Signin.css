@@ -5,6 +5,7 @@
   background-color: #2E0854;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
+  transition-duration: 0.4s;
 }
 
 .button:hover {
@@ -36,7 +37,15 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.background {
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 2%;
+  background-color: #2E0854;
+}
+
 .login {
+  background-color: white;
   padding-top: 3%;
   padding-bottom: 5%;
 }

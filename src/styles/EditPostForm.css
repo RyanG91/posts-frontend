@@ -1,10 +1,25 @@
-.newPost {
-  word-wrap: break-word;
-  background-color: white;
+.editBackground {
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 2%;
+  background-color: #2E0854;
 }
 
-.mainTitle {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+.editPostForm {
+  background-color: white;
+  padding-top: 3%;
+  padding-bottom: 5%;
+}
+
+.titleBox {
+  width: 40%;
+  border-color: #9B30FF;
+}
+
+.contentBox {
+  width: 40%;
+  height: 60px;
+  border-color: #9B30FF;
 }
 
 .createPost {
@@ -21,15 +36,4 @@
   background-color: white;
   border-color: #2E0854;
   color: black;
-}
-
-.titleBox {
-  width: 40%;
-  border-color: #9B30FF;
-}
-
-.contentBox {
-  width: 40%;
-  height: 60px;
-  border-color: #9B30FF;
 }
