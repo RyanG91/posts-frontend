@@ -24,11 +24,15 @@
 }
 
 .titleBox {
+  /* border-radius: 28px;
+  padding: 6px 5px; */
+
   width: 40%;
   border-color: #9B30FF;
 }
 
 .contentBox {
+  
   width: 40%;
   height: 60px;
   border-color: #9B30FF;

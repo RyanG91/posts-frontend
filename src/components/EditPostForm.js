@@ -10,13 +10,13 @@ export default function EditPostForm({ post, editPosts, removeEdit }) {
         <form onSubmit={editPosts}>
           <label>Title: </label>
           <br />
-          <input className="titleBox" type="text" name="title" defaultValue={post.title} />
+          <input className="editTitle" type="text" name="title" defaultValue={post.title} />
           <br />
           <br />
 
           <label>Content: </label>
           <br />
-          <textarea className="contentBox" type="text" name="content" defaultValue={post.content} />
+          <textarea className="editContent" type="text" name="content" defaultValue={post.content} />
           <br />
           <input type="hidden" name="id" value={post._id} />
           <button className="createPost" type="submit">Update</button>

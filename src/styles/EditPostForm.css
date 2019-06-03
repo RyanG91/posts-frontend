@@ -1,9 +1,9 @@
-.editBackground {
+/* .editBackground {
   padding-left: 15%;
   padding-right: 15%;
   padding-top: 2%;
   background-color: #2E0854;
-}
+} */
 
 .editPostForm {
   background-color: white;
@@ -11,12 +11,13 @@
   padding-bottom: 5%;
 }
 
-.titleBox {
+.editTitle {
   width: 40%;
   border-color: #9B30FF;
+  padding: 6px 5px;
 }
 
-.contentBox {
+.editContent {
   width: 40%;
   height: 60px;
   border-color: #9B30FF;

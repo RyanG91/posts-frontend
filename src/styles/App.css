@@ -1,5 +1,13 @@
 .App {
   text-align: center;
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 1%;
+  background-color: #2E0854;
+}
+
+.Posting {
+  background-color: white;
 }
 
 .logoutButton {
