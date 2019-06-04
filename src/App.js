@@ -92,7 +92,8 @@ class App extends Component {
     // api.post('/posts', { title: this.state.newPostTitle, content: this.state.newPostBody })
     api.post('/posts', { 
       title: store.getState().newPostTitle,
-      content: store.getState().newPostBody
+      content: store.getState().newPostBody,
+      created_at: Date.now()
     })
     .then((response) => {
         // const posts = [...this.state.posts, response.data]
@@ -151,12 +152,13 @@ class App extends Component {
                   } else {
                     return (
                       <Fragment>
+                        <button className="logoutButton" onClick={this.handleSignOut}>Logout</button>
                         <div>
                           <h4>Currently logged in as {tokenDetails.email}!</h4>
                           {/* <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p> */}
                           {/* <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p> */}
-                          <button className="logoutButton" onClick={this.handleSignOut}>Logout</button>
                         </div>
+                        <br />
                         <h1 className="mainTitle">Posting</h1>
                         <NewPost 
                           addPosts={this.addPosts} updateNewPostTitle={this.updateNewPostTitle} updateNewPostBody={this.updateNewPostBody}
