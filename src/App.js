@@ -93,7 +93,9 @@ class App extends Component {
     api.post('/posts', { 
       title: store.getState().newPostTitle,
       content: store.getState().newPostBody,
-      created_at: Date.now()
+      created_at: Date.now(),
+      likes: 0,
+      dislikes: 0
     })
     .then((response) => {
         // const posts = [...this.state.posts, response.data]
@@ -107,6 +109,10 @@ class App extends Component {
     .catch(function (error) {
       console.log(error)
     })
+  }
+
+  addLikes = (id) => {
+    
   }
 
   // Moved to storeMethods
@@ -174,7 +180,7 @@ class App extends Component {
 
                         <h2 className="mainTitle">Previous Posts</h2>
                         { posts.map((post) => 
-                          <Post key={post._id} {...post} />
+                          <Post key={post._id} {...post} addLikes={this.addLikes} />
                         ).reverse()}
                       </Fragment>
                     )

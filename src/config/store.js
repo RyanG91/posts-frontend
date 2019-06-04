@@ -7,7 +7,9 @@ const initialState = {
   newPostBody: '',
   loggedIn: false,
   loginError: null,
-  editing: null
+  editing: null,
+  likes: 0,
+  dislikes: 0
 }
 
 // Define reducers
