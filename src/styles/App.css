@@ -25,12 +25,17 @@
   transition-duration: 0.4s;
 }
 
+.tokenEmail {
+  float: left;
+}
+
 .logoutButton:hover {
   background-color: #9B30FF;
 }
 
 .mainTitle {
   font-family: Georgia, 'Times New Roman', Times, serif;
+  /* text-align: center; */
 }
 
 /* .App-logo {
