@@ -9,7 +9,11 @@ function Post (props) {
     <div className="post">
       <h4 className="postTitle">{ title }</h4>
       <p>{ content }</p>
-      <button onClick={addLikes}>Like</button>
+      <form onSubmit={addLikes}>
+        <input type="hidden" name="likes" value={likes} />      
+        <input type="hidden" name="id" value={_id} />      
+        <button type="submit">Like</button>
+      </form>
       <p>Likes: { likes }</p>
       <p>Dislikes: { dislikes }</p>
       <p>Created at: { created_at }</p>

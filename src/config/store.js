@@ -8,8 +8,6 @@ const initialState = {
   loggedIn: false,
   loginError: null,
   editing: null,
-  likes: 0,
-  dislikes: 0
 }
 
 // Define reducers

@@ -111,8 +111,27 @@ class App extends Component {
     })
   }
 
-  addLikes = (id) => {
-    
+  addLikes = (event) => {
+    event.preventDefault()
+    const form = event.target
+
+    const likess = Number(form.elements.likes.value)
+
+    // const number = Number(likess)
+
+    // console.log(number)
+
+    api
+    .put(`/posts/${form.elements.id.value}`, {
+      _id: form.elements.id.value,
+      likes: likess + 1,
+    })
+    .then(res => {
+      this.fetchPostings()
+    })
+    .catch(error => {
+      console.error(`Error adding likes to post: ${error}`)
+    })
   }
 
   // Moved to storeMethods
