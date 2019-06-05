@@ -114,23 +114,37 @@ class App extends Component {
   addLikes = (event) => {
     event.preventDefault()
     const form = event.target
-
-    const likess = Number(form.elements.likes.value)
-
-    // const number = Number(likess)
-
-    // console.log(number)
+    // Needs to be converted from a string to a number
+    const likeNumber = Number(form.elements.likes.value)
 
     api
-    .put(`/posts/${form.elements.id.value}`, {
-      _id: form.elements.id.value,
-      likes: likess + 1,
-    })
-    .then(res => {
-      this.fetchPostings()
-    })
-    .catch(error => {
-      console.error(`Error adding likes to post: ${error}`)
+      .put(`/posts/${form.elements.id.value}`, {
+        // _id: form.elements.id.value,
+        likes: likeNumber + 1
+      })
+      .then(res => {
+        this.fetchPostings()
+      })
+      .catch(error => {
+        console.error(`Error adding likes to post: ${error}`)
+      })
+  }
+
+  addDislikes = (event) => {
+    event.preventDefault()
+    const form = event.target
+    // Needs to be converted from a string to a number
+    const dislikeNumber = Number(form.elements.dislikes.value)
+
+    api
+      .put(`/posts/${form.elements.id.value}`, {
+        dislikes: dislikeNumber + 1
+      })
+      .then(res => {
+        this.fetchPostings()
+      })
+      .catch(error => {
+        console.error(`Error adding dislikes to post: ${error}`)
     })
   }
 
@@ -178,11 +192,13 @@ class App extends Component {
                     return (
                       <Fragment>
                         <button className="logoutButton" onClick={this.handleSignOut}>Logout</button>
+                        <h4 className="tokenEmail">Currently logged in as {tokenDetails.email}!</h4>
                         <div>
-                          <h4>Currently logged in as {tokenDetails.email}!</h4>
                           {/* <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p> */}
                           {/* <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p> */}
                         </div>
+                        <br />
+                        <br />
                         <br />
                         <h1 className="mainTitle">Posting</h1>
                         <NewPost 
@@ -199,7 +215,7 @@ class App extends Component {
 
                         <h2 className="mainTitle">Previous Posts</h2>
                         { posts.map((post) => 
-                          <Post key={post._id} {...post} addLikes={this.addLikes} />
+                          <Post key={post._id} {...post} addLikes={this.addLikes} addDislikes={this.addDislikes} />
                         ).reverse()}
                       </Fragment>
                     )
