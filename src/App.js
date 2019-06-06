@@ -87,6 +87,14 @@ class App extends Component {
     store.dispatch(setEditingAction(null))
   }
 
+  backToLogin = () => {
+    store.dispatch({ type: 'set_registerError', registerError: null})
+  }
+
+  goToRegister = () => {
+    store.dispatch({ type: 'set_loginError', loginError: null})
+  }
+
   editPosts = (event) => {
     event.preventDefault()
     const form = event.target
@@ -109,25 +117,26 @@ class App extends Component {
     event.preventDefault()
     const form = event.target
     // api.post('/posts', { title: this.state.newPostTitle, content: this.state.newPostBody })
-    api.post('/posts', { 
-      title: store.getState().newPostTitle,
-      content: store.getState().newPostBody,
-      created_at: Date.now(),
-      likes: 0,
-      dislikes: 0
-    })
-    .then((response) => {
-        // const posts = [...this.state.posts, response.data]
-        const posts = [...store.getState().posts, response.data]
-        // this.setState({ posts, newPostTitle: '', newPostBody: '' })
-        store.dispatch({ type: 'set_posts', posts, newPostTitle: '', newPostBody: '' })
-        this.fetchPostings()
-        form.elements.title.value = ""
-        form.elements.content.value = ""
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
+    api
+      .post('/posts', { 
+        title: store.getState().newPostTitle,
+        content: store.getState().newPostBody,
+        created_at: Date.now(),
+        likes: 0,
+        dislikes: 0
+      })
+      .then((response) => {
+          // const posts = [...this.state.posts, response.data]
+          const posts = [...store.getState().posts, response.data]
+          // this.setState({ posts, newPostTitle: '', newPostBody: '' })
+          store.dispatch({ type: 'set_posts', posts, newPostTitle: '', newPostBody: '' })
+          this.fetchPostings()
+          form.elements.title.value = ""
+          form.elements.content.value = ""
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 
   addLikes = (event) => {
@@ -195,12 +204,23 @@ class App extends Component {
                 if (this.token) {
                   return (<Redirect to="/postings" />)
                 } else {
-                  return (<Signin loginError={store.getState().loginError} handleSignIn={this.handleSignIn} />)
+                  return (
+                    <Signin loginError={store.getState().loginError} 
+                            goToRegister={this.goToRegister} 
+                            handleSignIn={this.handleSignIn} 
+                    />
+                  )
                 }
               }} />
 
               <Route exact path="/register" render={(props) => {
-                return <Register registerError={store.getState().registerError} registerSuccess={store.getState().registerSuccess} handleRegister={this.handleRegister} />
+                return (
+                  <Register backToLogin={this.backToLogin} 
+                            registerError={store.getState().registerError} 
+                            registerSuccess={store.getState().registerSuccess} 
+                            handleRegister={this.handleRegister} 
+                  />
+                )
               }} />
 
               <Route exact path="/postings" render={() =>  {
