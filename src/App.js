@@ -4,6 +4,7 @@ import { api, setJwt} from './api/init'
 import decodeJWT from 'jwt-decode'
 import NewPost from './components/NewPost'
 import Signin from './components/Signin'
+import Register from './components/Register'
 import Notfound from './components/Notfound'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import Post from './components/Post'
@@ -61,6 +62,24 @@ class App extends Component {
       store.dispatch({ type: 'set_loggedIn', loggedIn: false})
       store.dispatch({ type: 'set_posts', posts: [] })
     })
+  }
+
+  handleRegister = async (event) => {
+      event.preventDefault()
+      const form = event.target
+      api
+        .post('/users/register', {
+          email: form.elements.email.value,
+          password: form.elements.password.value
+        })
+        .then(res => {
+          store.dispatch({ type: 'set_registerSuccess', registerSuccess: 'Success, you have registered. Please return to the login screen and login' })
+        })
+        .catch(error => {
+          console.log(`Something went wrong`)
+          store.dispatch({ type: 'set_registerError', registerError: 'Sorry, that email is already taken'})
+        })
+        
   }
 
   removeEdit = () => {
@@ -178,6 +197,10 @@ class App extends Component {
                 } else {
                   return (<Signin loginError={store.getState().loginError} handleSignIn={this.handleSignIn} />)
                 }
+              }} />
+
+              <Route exact path="/register" render={(props) => {
+                return <Register registerError={store.getState().registerError} registerSuccess={store.getState().registerSuccess} handleRegister={this.handleRegister} />
               }} />
 
               <Route exact path="/postings" render={() =>  {
