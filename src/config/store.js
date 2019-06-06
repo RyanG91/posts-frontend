@@ -8,6 +8,8 @@ const initialState = {
   loggedIn: false,
   loginError: null,
   editing: null,
+  registerSuccess: null,
+  registerError: null
 }
 
 // Define reducers
@@ -23,6 +25,11 @@ const reducer = (state, action) => {
       return { ...state, loginError: action.loginError }
     case 'set_loggedIn':
       return { ...state, loggedIn: action.loggedIn }
+
+    case 'set_registerError':
+      return {...state, registerError: action.registerError}
+    case 'set_registerSuccess':
+      return {...state, registerSuccess: action.registerSuccess}
 
     case 'set_newPostTitle':
       return { ...state, newPostTitle: action.newPostTitle }
