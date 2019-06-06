@@ -1,8 +1,11 @@
 import React from "react"
+import { Link } from 'react-router-dom'
 
-export default ({ handleRegister, registerSuccess, registerError }) => (
+export default ({ handleRegister, registerSuccess, registerError, backToLogin }) => (
       <div>
         <h2>Register</h2>
+
+        {/* Registers a new user with the handleRegister function */}
         <form onSubmit={handleRegister}>
           { registerSuccess && <p>{ registerSuccess }</p> }
           { registerError && <p>{ registerError }</p> }
@@ -18,5 +21,12 @@ export default ({ handleRegister, registerSuccess, registerError }) => (
         </form>
         <br />
         <br />
+
+        {/* Navigates back to the Login page */}
+        <Link to="/login">
+          <button type="button" onClick={backToLogin}>
+            Return to login
+          </button>
+        </Link>
       </div>
 )
