@@ -114,6 +114,7 @@ class App extends Component {
   }
 
   addPosts = (event) => {
+    const tokenDetails = this.token && decodeJWT(this.token)
     event.preventDefault()
     const form = event.target
     // api.post('/posts', { title: this.state.newPostTitle, content: this.state.newPostBody })
@@ -122,6 +123,7 @@ class App extends Component {
         title: store.getState().newPostTitle,
         content: store.getState().newPostBody,
         created_at: Date.now(),
+        created_by: tokenDetails.email,
         likes: 0,
         dislikes: 0
       })
