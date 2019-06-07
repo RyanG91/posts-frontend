@@ -256,8 +256,6 @@ class App extends Component {
                           <input type="submit" value="Submit" />
                         </form> */}
                         <br />
-                        <br />
-
                         <h2 className="mainTitle">Previous Posts</h2>
                         { posts.map((post) => 
                           <Post key={post._id} {...post} addLikes={this.addLikes} addDislikes={this.addDislikes} />
