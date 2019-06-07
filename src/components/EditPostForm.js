@@ -19,11 +19,11 @@ export default function EditPostForm({ post, editPosts, removeEdit }) {
           <textarea className="editContent" type="text" name="content" defaultValue={post.content} />
           <br />
           <input type="hidden" name="id" value={post._id} />
-          <button className="createPost" type="submit">Update</button>
+          <button className="editPost" type="submit">Update</button>
         </form>
         <br />
         <form onSubmit={removeEdit}>
-          <button className="createPost">Back</button>
+          <button className="editPost">Back</button>
         </form>
       </div>
     </div>

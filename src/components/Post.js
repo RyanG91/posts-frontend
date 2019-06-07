@@ -7,12 +7,14 @@ function Post (props) {
   const { _id, title, content, created_by, created_at, likes, dislikes, addLikes, addDislikes, deletePost} = props
   return (
     <div className="post">
-      <p><strong>{ created_by }</strong> says at <strong>{ created_at }</strong></p>
-
-      <h4 className="postTitle">{ title }</h4>
-      <p>{ content }</p>
-
+      <p className="createdByAndAt"><strong>{ created_by }</strong> says at <strong>{ created_at }</strong></p>
       <br />
+      <h4 className="postTitle">{ title }</h4>
+      <br />
+      <br />
+      <br />
+
+      <p className="postContent">{ content }</p>
       <br />
       <button className="editButton" onClick={() => store.dispatch(setEditingAction(props))}>Edit Post</button>
       <button className="deleteButton" onClick={ () => store.dispatch({ type: 'delete_postings', id: _id }) }>Delete Post</button>
