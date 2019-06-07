@@ -8,7 +8,7 @@ export default function NewPost({ addPosts, updateNewPostTitle, updateNewPostBod
       <form onSubmit={addPosts}>
         <label>Title: </label><br /><input className="titleBox" type="text" name="title" onChange={updateNewPostTitle} /><br />
         <br />
-        <label>Content: </label><br /><textarea className="contentBox" type="text" name="content" onChange={updateNewPostBody} /><br />
+        <label>Content: </label><br /><textarea maxLength="500" className="contentBox" type="text" name="content" onChange={updateNewPostBody} /><br />
         <br />
         <button className="createPost" type="submit">Create</button>
       </form>

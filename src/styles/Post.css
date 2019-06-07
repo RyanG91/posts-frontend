@@ -2,6 +2,8 @@
   border-style: solid;
   border-color: grey;
   background-color: white;
+  position: relative;
+  margin-bottom: 3%;
 }
 
 .postTitle {
@@ -19,6 +21,9 @@
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   transition-duration: 0.4s;
+  position: absolute;
+  bottom: 70px;
+  right: 320px;
 }
 
 .deleteButton:hover {
@@ -34,10 +39,61 @@
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   transition-duration: 0.4s;
+  position: absolute;
+  bottom: 70px;
+  left: 340px;
 }
 
 .editButton:hover {
   background-color: white;
   border-color: darkblue;
   color: black;
+}
+
+.likeButton {
+  border-radius: 28px;
+  padding: 4px 10px;
+  background-color: #2E0854;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  transition-duration: 0.4s;
+  position: absolute;
+  bottom: 4px;
+  left: 128px;
+}
+
+.likeButton:hover {
+  background-color: white;
+  border-color: #2E0854;
+  color: black;
+}
+
+.likeCounter {
+  position: absolute;
+  bottom: -8px;
+  left: 192px;
+}
+
+.dislikeButton {
+  border-radius: 28px;
+  padding: 4px 10px;
+  background-color: #2E0854;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  transition-duration: 0.4s;
+  position: absolute;
+  bottom: 4px;
+  left: 320px;
+}
+
+.dislikeButton:hover {
+  background-color: white;
+  border-color: #2E0854;
+  color: black;
+}
+
+.dislikeCounter {
+  position: absolute;
+  bottom: -8px;
+  left: 400px;
 }
