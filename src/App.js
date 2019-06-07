@@ -77,7 +77,7 @@ class App extends Component {
         })
         .catch(error => {
           console.log(`Something went wrong`)
-          store.dispatch({ type: 'set_registerError', registerError: 'Sorry, that email is already taken'})
+          store.dispatch({ type: 'set_registerError', registerError: 'Sorry, that email is already taken or you entered an invalid email'})
         })
         
   }

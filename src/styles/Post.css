@@ -4,10 +4,28 @@
   background-color: white;
   position: relative;
   margin-bottom: 3%;
+  padding-left: 3%;
+  padding-right: 3%;
 }
 
 .postTitle {
   font-family: Georgia, 'Times New Roman', Times, serif;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.createdByAndAt {
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .postContent {
@@ -24,6 +42,7 @@
   position: absolute;
   bottom: 70px;
   right: 320px;
+  outline: 0;
 }
 
 .deleteButton:hover {
@@ -42,6 +61,7 @@
   position: absolute;
   bottom: 70px;
   left: 340px;
+  outline: 0;
 }
 
 .editButton:hover {
@@ -60,6 +80,7 @@
   position: absolute;
   bottom: 4px;
   left: 128px;
+  outline: 0;
 }
 
 .likeButton:hover {
@@ -84,6 +105,7 @@
   position: absolute;
   bottom: 4px;
   left: 320px;
+  outline: 0;
 }
 
 .dislikeButton:hover {

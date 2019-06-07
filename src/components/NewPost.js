@@ -6,9 +6,9 @@ export default function NewPost({ addPosts, updateNewPostTitle, updateNewPostBod
     <div className="newPost">
       <h2 className="mainTitle">New Post</h2>
       <form onSubmit={addPosts}>
-        <label>Title: </label><br /><input className="titleBox" type="text" name="title" onChange={updateNewPostTitle} /><br />
+        <label>Title: </label><br /><input className="titleBox" type="text" name="title" placeholder="Title of your content" onChange={updateNewPostTitle} /><br />
         <br />
-        <label>Content: </label><br /><textarea maxLength="500" className="contentBox" type="text" name="content" onChange={updateNewPostBody} /><br />
+        <label>Content: </label><br /><textarea maxLength="500" className="contentBox" type="text" name="content" placeholder="What's on your mind" onChange={updateNewPostBody} /><br />
         <br />
         <button className="createPost" type="submit">Create</button>
       </form>
