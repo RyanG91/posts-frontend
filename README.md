@@ -15,13 +15,19 @@ The backend can be found at: https://github.com/RyanG91/posts.
 * Delete posts
 * Edit posts
 * Login required
-* Styling
-
-### Future features:
 * Likes counter
 * Dislikes counter
 * Author of posts
+* Styling
 * Time posts were created
+
+### Future features:
+* Comments
+* Like and dislike comments
+* Author and time of comments
+* Filter comments
+* Like/Dislike bar
+* Favourite post
 * Tests
 * Further styling
 * Potential deployment (Database is currently local)
