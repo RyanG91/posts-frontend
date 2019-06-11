@@ -1,30 +1,33 @@
 import React from "react"
 import { Link } from 'react-router-dom'
+import '../styles/Register.css'
 
 export default ({ handleRegister, registerSuccess, registerError, backToLogin }) => (
-      <div>
-        <h2>Register</h2>
+      <div className="registerBackground">
+        <h1 className="registerTitle">Register</h1>
+        <h4 className="registerTitle">Please enter your email and password below.</h4>
+        <br />
 
         {/* Registers a new user with the handleRegister function */}
-        <form onSubmit={handleRegister}>
+        <form className="registerForm" onSubmit={handleRegister}>
           { registerSuccess && <p>{ registerSuccess }</p> }
           { registerError && <p>{ registerError }</p> }
           <label className="info">Email: </label> 
-          <input type="email" name="email" />
+          <input className="registerInformation" type="email" name="email" />
           <br />
           <br />
           <label className="info">Password: </label>
-          <input type="password" name="password" />
+          <input className="registerInformation" type="password" name="password" />
           <br />
           <br />
-          <button type="submit">Register</button>
+          <button className="registerButton" type="submit">Register</button>
         </form>
-        <br />
         <br />
 
         {/* Navigates back to the Login page */}
+        <h4 className="registerTitle">Return to login screen</h4>
         <Link to="/login">
-          <button type="button" onClick={backToLogin}>
+          <button className="registerButton" type="button" onClick={backToLogin}>
             Return to login
           </button>
         </Link>

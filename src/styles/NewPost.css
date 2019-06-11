@@ -34,6 +34,10 @@
 .contentBox {
   /* resize: vertical; */
   width: 40%;
+  max-width:90%;
+  min-width:30%;
   height: 60px;
+  min-height:50px;
+  max-height:200px;
   border-color: #9B30FF;
 }

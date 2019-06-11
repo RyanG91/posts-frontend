@@ -1,0 +1,39 @@
+.registerBackground {
+  /* padding-top: 10%; */
+  /* padding-bottom: 11.3%; */
+  background-color: white;
+  padding-top: 3%;
+  padding-bottom: 7.9%;
+}
+
+.registerForm {
+  padding-top: 5%;
+  padding: 16px;
+}
+
+.registerTitle {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.registerInformation {
+  border-collapse: separate;
+  border-radius: 28px;
+  outline: 0;
+  width: 30%;
+  padding: 6px 5px;
+}
+
+.registerButton {
+  /* border: none; */
+  border-radius: 28px;
+  padding: 15px 32px;
+  background-color: #2E0854;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  transition-duration: 0.4s;
+  outline: 0;
+}
+
+.registerButton:hover {
+  background-color: #9B30FF;
+}
