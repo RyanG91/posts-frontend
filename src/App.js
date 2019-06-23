@@ -12,9 +12,7 @@ import store from './config/store'
 import EditPostForm from './components/EditPostForm';
 import { setEditingAction } from './config/actions'
 
-
 class App extends Component {
-
   get token() {
     return localStorage.getItem('token')
   }
