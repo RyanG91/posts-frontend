@@ -20,9 +20,6 @@ function Post (props) {
       <button className="editButton" onClick={() => store.dispatch(setEditingAction(props))}>Edit Post</button>
       <button className="deleteButton" onClick={ () => store.dispatch({ type: 'delete_postings', id: _id }) }>Delete Post</button>
       <br />
-      <br />
-      <br />
-      <br />
       <div className="postBottom">
         <form onSubmit={addLikes}>
             <input type="hidden" name="likes" value={likes} />      
@@ -36,13 +33,16 @@ function Post (props) {
             <button className="dislikeButton" type="submit">Dislike</button>
           </form>
           <p className="dislikeCounter">Dislikes: { dislikes }</p>
-          <p>Comments: { comments.length } </p>
+          <p className="commentsCounter">Comments: { comments.length } </p>
           {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
       </div>
-        <h5>Comments</h5>
+      <div className="commentsArea">
+        <h4 className="commentsTitle">Comments</h4>
         { comments.map(comment => (
           <Comments key={comment._id} {...comment} />
         )) }
+      </div>
+
     </div> 
   )
 }
