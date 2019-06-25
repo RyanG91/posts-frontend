@@ -1,10 +1,11 @@
 import React from 'react'
 import store from '../config/store'
 import { setEditingAction } from "../config/actions"
+import Comments from "./Comments"
 import '../styles/Post.css'
 
 function Post (props) {
-  const { _id, title, content, created_by, created_at, likes, dislikes, addLikes, addDislikes, deletePost} = props
+  const { _id, title, content, created_by, created_at, likes, comments, dislikes, addLikes, addDislikes, deletePost} = props
   return (
     <div className="post">
       <p className="createdByAndAt"><strong>{ created_by }</strong> says at <strong>{ created_at }</strong></p>
@@ -35,8 +36,13 @@ function Post (props) {
             <button className="dislikeButton" type="submit">Dislike</button>
           </form>
           <p className="dislikeCounter">Dislikes: { dislikes }</p>
+          <p>Comments: { comments.length } </p>
           {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
       </div>
+        <h5>Comments</h5>
+        { comments.map(comment => (
+          <Comments key={comment._id} {...comment} />
+        )) }
     </div> 
   )
 }
