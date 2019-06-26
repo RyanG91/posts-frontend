@@ -12,8 +12,6 @@ function Post (props) {
       <br />
       <h4 className="postTitle">{ title }</h4>
       <br />
-      <br />
-      <br />
 
       <p className="postContent">{ content }</p>
       <br />
@@ -36,8 +34,8 @@ function Post (props) {
           <p className="commentsCounter">Comments: { comments.length } </p>
           {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
       </div>
+      <h4 className="commentsTitle">Comments</h4>
       <div className="commentsArea">
-        <h4 className="commentsTitle">Comments</h4>
         { comments.map(comment => (
           <Comments key={comment._id} {...comment} />
         )) }
