@@ -9,31 +9,43 @@ function Post (props) {
   return (
     <div className="post">
       <p className="createdByAndAt"><strong>{ created_by }</strong> says at <strong>{ created_at }</strong></p>
-      <br />
+      {/* <br /> */}
       <h4 className="postTitle">{ title }</h4>
-      <br />
-
       <p className="postContent">{ content }</p>
       <br />
-      <button className="editButton" onClick={() => store.dispatch(setEditingAction(props))}>Edit Post</button>
-      <button className="deleteButton" onClick={ () => store.dispatch({ type: 'delete_postings', id: _id }) }>Delete Post</button>
-      <br />
-      <div className="postBottom">
-        <form onSubmit={addLikes}>
-            <input type="hidden" name="likes" value={likes} />      
-            <input type="hidden" name="id" value={_id} />      
-            <button className="likeButton" type="submit">Like</button>
-          </form>
-          <p className="likeCounter">Likes: { likes }</p>
-          <form onSubmit={addDislikes}>
-            <input type="hidden" name="dislikes" value={dislikes} />      
-            <input type="hidden" name="id" value={_id} />      
-            <button className="dislikeButton" type="submit">Dislike</button>
-          </form>
-          <p className="dislikeCounter">Dislikes: { dislikes }</p>
-          <p className="commentsCounter">Comments: { comments.length } </p>
-          {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
+      <div className="editAndDeleteButtons">
+        <button className="editButton" onClick={() => store.dispatch(setEditingAction(props))}>Edit Post</button>
+        <button className="deleteButton" onClick={ () => store.dispatch({ type: 'delete_postings', id: _id }) }>Delete Post</button>
       </div>
+      <br />
+      <div className="postFeatures">
+        <form onSubmit={addLikes}>
+          <input type="hidden" name="likes" value={likes} />      
+          <input type="hidden" name="id" value={_id} />      
+          <button className="likeButton" type="submit">Like</button>
+        </form>
+      </div>
+      <div className="postFeatures">
+        <p className="likeCounter">Likes: { likes }</p>
+      </div>
+      <div className="postFeatures">
+        <form onSubmit={addDislikes}>
+          <input type="hidden" name="dislikes" value={dislikes} />      
+          <input type="hidden" name="id" value={_id} />      
+          <button className="dislikeButton" type="submit">Dislike</button>
+        </form>
+      </div>
+      <div className="postFeatures">
+        <p className="dislikeCounter">Dislikes: { dislikes }</p>
+      </div>
+      <div className="postFeatures">
+        <p className="commentsCounter">Comments: { comments.length } </p>
+        {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
+      </div>
+      <br />
+      <br />
+      <br />
+
       <h4 className="commentsTitle">Comments</h4>
       <div className="commentsArea">
         { comments.map(comment => (
