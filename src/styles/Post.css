@@ -69,11 +69,17 @@
 
 .postFeatures {
   float: left;
-  /* width: 20%; */
   padding: 5px;
+  padding-right: 35px;
 }
 
-.likeButton {
+.postFeaturesRight {
+  float: right;
+  padding: 5px;
+  padding-left: 35px;
+}
+
+.postFeaturesButton {
   border-radius: 28px;
   padding: 4px 10px;
   background-color: #2E0854;
@@ -83,30 +89,25 @@
   outline: 0;
 }
 
-.likeButton:hover {
+.postFeaturesButton:hover {
   background-color: white;
   border-color: #2E0854;
   color: black;
 }
 
 .likeCounter {
-  /* float: left; */
+  position: relative;
+  bottom: 13px;
 }
 
-.dislikeButton {
-  border-radius: 28px;
-  padding: 4px 10px;
-  background-color: #2E0854;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  transition-duration: 0.4s;
-  outline: 0;
+.dislikeCounter {
+  position: relative;
+  bottom: 13px;
 }
 
-.dislikeButton:hover {
-  background-color: white;
-  border-color: #2E0854;
-  color: black;
+.commentsCounter {
+  position: relative;
+  bottom: 13px;
 }
 
 /* Comments part */

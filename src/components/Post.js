@@ -6,6 +6,7 @@ import '../styles/Post.css'
 
 function Post (props) {
   const { _id, title, content, created_by, created_at, likes, comments, dislikes, addLikes, addDislikes, deletePost} = props
+  console.log(comments)
   return (
     <div className="post">
       <p className="createdByAndAt"><strong>{ created_by }</strong> says at <strong>{ created_at }</strong></p>
@@ -22,7 +23,7 @@ function Post (props) {
         <form onSubmit={addLikes}>
           <input type="hidden" name="likes" value={likes} />      
           <input type="hidden" name="id" value={_id} />      
-          <button className="likeButton" type="submit">Like</button>
+          <button className="postFeaturesButton" type="submit">Like</button>
         </form>
       </div>
       <div className="postFeatures">
@@ -32,15 +33,18 @@ function Post (props) {
         <form onSubmit={addDislikes}>
           <input type="hidden" name="dislikes" value={dislikes} />      
           <input type="hidden" name="id" value={_id} />      
-          <button className="dislikeButton" type="submit">Dislike</button>
+          <button className="postFeaturesButton" type="submit">Dislike</button>
         </form>
       </div>
       <div className="postFeatures">
         <p className="dislikeCounter">Dislikes: { dislikes }</p>
       </div>
-      <div className="postFeatures">
+      <div className="postFeaturesRight">
         <p className="commentsCounter">Comments: { comments.length } </p>
         {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
+      </div>
+      <div className="postFeaturesRight">
+        <button className="postFeaturesButton">Create comment</button>
       </div>
       <br />
       <br />
@@ -48,9 +52,15 @@ function Post (props) {
 
       <h4 className="commentsTitle">Comments</h4>
       <div className="commentsArea">
-        { comments.map(comment => (
+        { 
+          comments.length === 0 ? <p>There are no comments</p> : comments.map(comment => (
+            <Comments key={comment._id} {...comment} />
+          ))
+        }
+
+        {/* { comments.map(comment => (
           <Comments key={comment._id} {...comment} />
-        )) }
+        )) } */}
       </div>
 
     </div> 
