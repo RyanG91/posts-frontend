@@ -176,6 +176,7 @@ class App extends Component {
     })
   }
 
+  // POST request for comments on individual posts
   createComment = (event) => {
     event.preventDefault()
     const form = event.target
@@ -246,7 +247,6 @@ class App extends Component {
                 if (this.token) {
                   if (store.getState().editing) {
                     let post = store.getState().editing
-                    // console.log(`in app post: ${post._id}`)
                     return (
                       <EditPostForm key={post._id} post={post} editPosts={this.editPosts} removeEdit={this.removeEdit} />
                     )
@@ -266,12 +266,6 @@ class App extends Component {
                         <NewPost 
                           addPosts={this.addPosts} updateNewPostTitle={this.updateNewPostTitle} updateNewPostBody={this.updateNewPostBody}
                         />
-                        {/* <h2>New Post</h2>
-                        <form onSubmit={this.addPosts}>
-                          <label>Title:</label><br /><input onChange={this.updateNewPostTitle} /><br />
-                          <label>Content:</label><br /><input onChange={this.updateNewPostBody} /><br />
-                          <input type="submit" value="Submit" />
-                        </form> */}
                         <br />
                         <h2 className="mainTitle">Previous Posts</h2>
                         { posts.map((post) => 
