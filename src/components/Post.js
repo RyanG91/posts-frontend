@@ -8,6 +8,9 @@ function Post (props) {
   const { _id, title, content, created_by, created_at, likes, comments, dislikes, addLikes, addDislikes, createComment, deletePost} = props
   return (
     <div className="post">
+
+{/* Post details */}
+
       <p className="createdByAndAt"><strong>{ created_by }</strong> says at <strong>{ created_at }</strong></p>
       <h4 className="postTitle">{ title }</h4>
       <p className="postContent">{ content }</p>
@@ -17,6 +20,9 @@ function Post (props) {
         <button className="deleteButton" onClick={ () => store.dispatch({ type: 'delete_postings', id: _id }) }>Delete Post</button>
       </div>
       <br />
+
+{/* Post features */}
+
       <div className="postFeatures">
         <form onSubmit={addLikes}>
           <input type="hidden" name="likes" value={likes} />      
@@ -44,6 +50,9 @@ function Post (props) {
       <br />
       <br />
       <br />
+
+{/* Comments section */}
+
       <form onSubmit={createComment}>
         <input type="text" name="comments" />
         <input type="hidden" name="id" value={_id} />
@@ -57,10 +66,6 @@ function Post (props) {
             <Comments key={comment._id} {...comment} />
           ))
         }
-
-        {/* { comments.map(comment => (
-          <Comments key={comment._id} {...comment} />
-        )) } */}
       </div>
 
     </div> 
