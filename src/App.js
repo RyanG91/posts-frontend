@@ -176,6 +176,25 @@ class App extends Component {
     })
   }
 
+  createComment = (event) => {
+    event.preventDefault()
+    const form = event.target
+    // console.log(form)
+
+    api
+      .post(`/posts/${form.elements.id.value}/comments`, {
+        _id: form.elements.id.value,
+        comments: { body: form.elements.comments.value }
+      })
+      .then(res => {
+        form.elements.comments.value = ''
+        this.fetchPostings()
+      })
+      .catch(error => {
+        console.error(`Error updating post: ${error}`)
+      })
+  }
+
   // Moved to storeMethods
   // deletePost = (id) => {
   //   api.delete(`/posts/${id}`)
@@ -256,7 +275,7 @@ class App extends Component {
                         <br />
                         <h2 className="mainTitle">Previous Posts</h2>
                         { posts.map((post) => 
-                          <Post key={post._id} {...post} addLikes={this.addLikes} addDislikes={this.addDislikes} />
+                          <Post key={post._id} {...post} addLikes={this.addLikes} addDislikes={this.addDislikes} createComment={this.createComment} />
                         ).reverse()}
                       </Fragment>
                     )
