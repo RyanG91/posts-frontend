@@ -5,12 +5,10 @@ import Comments from "./Comments"
 import '../styles/Post.css'
 
 function Post (props) {
-  const { _id, title, content, created_by, created_at, likes, comments, dislikes, addLikes, addDislikes, deletePost} = props
-  console.log(comments)
+  const { _id, title, content, created_by, created_at, likes, comments, dislikes, addLikes, addDislikes, createComment, deletePost} = props
   return (
     <div className="post">
       <p className="createdByAndAt"><strong>{ created_by }</strong> says at <strong>{ created_at }</strong></p>
-      {/* <br /> */}
       <h4 className="postTitle">{ title }</h4>
       <p className="postContent">{ content }</p>
       <br />
@@ -43,13 +41,15 @@ function Post (props) {
         <p className="commentsCounter">Comments: { comments.length } </p>
         {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
       </div>
-      <div className="postFeaturesRight">
-        <button className="postFeaturesButton">Create comment</button>
-      </div>
       <br />
       <br />
       <br />
-
+      <form onSubmit={createComment}>
+        <input type="text" name="comments" />
+        <input type="hidden" name="id" value={_id} />
+        <button className="postFeaturesButton" type="submit">Create comment</button>
+      </form>
+      <br />
       <h4 className="commentsTitle">Comments</h4>
       <div className="commentsArea">
         { 
