@@ -54,7 +54,7 @@ function Post (props) {
 {/* Comments section */}
 
       <form onSubmit={createComment}>
-        <input type="text" name="comments" />
+        <input type="text" name="comments" placeholder="150 characters max" maxLength="150" />
         <input type="hidden" name="id" value={_id} />
         <button className="postFeaturesButton" type="submit">Create comment</button>
       </form>

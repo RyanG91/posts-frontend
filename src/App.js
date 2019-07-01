@@ -178,14 +178,19 @@ class App extends Component {
 
   // POST request for comments on individual posts
   createComment = (event) => {
+    const tokenDetails = this.token && decodeJWT(this.token)
     event.preventDefault()
     const form = event.target
-    // console.log(form)
+    console.log(tokenDetails.email)
 
     api
       .post(`/posts/${form.elements.id.value}/comments`, {
         _id: form.elements.id.value,
-        comments: { body: form.elements.comments.value }
+        comments: { 
+          body: form.elements.comments.value,
+          createdAt: Date.now(),
+          createdBy: tokenDetails.email
+        }
       })
       .then(res => {
         form.elements.comments.value = ''

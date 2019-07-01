@@ -20,11 +20,11 @@ The backend can be found at: https://github.com/RyanG91/posts.
 * Author of posts
 * Styling
 * Time posts were created
+* Author and time of comments
+* Comments
 
 ### Future features:
-* Comments
 * Like and dislike comments
-* Author and time of comments
 * Filter comments
 * Like/Dislike bar
 * Favourite post
