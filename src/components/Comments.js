@@ -2,7 +2,9 @@ import React from "react"
 import "../styles/Comments.css"
 
 function Comments(props) {
-  const { _id, body } = props
+  console.log('test')
+  const { _id, body, createdBy, createdAt } = props
+  // console.log(createdBy)
   if (body === null) {
     return (
       <div className="commentsSection">
@@ -12,6 +14,7 @@ function Comments(props) {
   } else {
     return (
       <div className="commentsSection">
+        <p><strong>{createdBy}</strong> commented at: {createdAt} </p>
         <p>{body}</p>
       </div>
     )
