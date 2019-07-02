@@ -115,6 +115,7 @@ class App extends Component {
     const tokenDetails = this.token && decodeJWT(this.token)
     event.preventDefault()
     const form = event.target
+
     // api.post('/posts', { title: this.state.newPostTitle, content: this.state.newPostBody })
     api
       .post('/posts', { 
@@ -260,10 +261,8 @@ class App extends Component {
                       <Fragment>
                         <button className="logoutButton" onClick={this.handleSignOut}>Logout</button>
                         <h4 className="tokenEmail">Currently logged in as {tokenDetails.email}!</h4>
-                        <div>
                           {/* <p>You logged in at: {new Date(tokenDetails.iat * 1000).toLocaleString()}</p> */}
                           {/* <p>Your token expires at: {new Date(tokenDetails.exp * 1000).toLocaleString()}</p> */}
-                        </div>
                         <br />
                         <br />
                         <br />
