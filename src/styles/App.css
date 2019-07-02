@@ -27,6 +27,7 @@
 
 .tokenEmail {
   float: left;
+  padding-left: 20px;
 }
 
 .logoutButton:hover {

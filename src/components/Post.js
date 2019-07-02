@@ -6,15 +6,17 @@ import '../styles/Post.css'
 
 function Post (props) {
   const { _id, title, content, created_by, created_at, likes, comments, dislikes, addLikes, addDislikes, createComment, deletePost} = props
+  
+  let postTime = (new Date(created_at)).toLocaleString('en-GB', { hour12: true })
+  
   return (
     <div className="post">
 
 {/* Post details */}
 
-      <p className="createdByAndAt"><strong>{ created_by }</strong> says at <strong>{ created_at }</strong></p>
+      <p className="createdByAndAt"><strong>{ created_by }</strong> says at <strong>{ postTime }</strong></p>
       <h4 className="postTitle">{ title }</h4>
       <p className="postContent">{ content }</p>
-      <br />
       <div className="editAndDeleteButtons">
         <button className="editButton" onClick={() => store.dispatch(setEditingAction(props))}>Edit Post</button>
         <button className="deleteButton" onClick={ () => store.dispatch({ type: 'delete_postings', id: _id }) }>Delete Post</button>
