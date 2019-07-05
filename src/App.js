@@ -204,6 +204,7 @@ class App extends Component {
       })
   }
 
+  // Deletes a Comment based on its id and the post ID
   deleteComment = (id, postId) => {
     // console.log('this is a delete button')
     // console.log(postId)
@@ -224,7 +225,48 @@ class App extends Component {
 
   addLikesComment = (event) => {
     event.preventDefault()
+    // console.log('test')
+
+    const form = event.target
+
+    // console.log(form)
+
+    const likeNumber = Number(form.elements.likes.value)
+    // console.log(likeNumber)
+
+    // api
+    //   .put(`/posts/${form.elements.postId.value}/comments/${form.elements.id.value}`, {
+    //     likes: likeNumber + 1
+    //   })
+    //   .then(res => {
+    //     this.fetchPostings()
+    //   })
+    //   .catch(error => {
+    //     console.log(`Error adding likes to comment: ${error}`)
+    //   })
+  }
+
+  addDislikesComment = (event) => {
+    event.preventDefault()
     console.log('test')
+
+    const form = event.target
+
+    console.log(form)
+
+    const dislikesNumber = Number(form.elements.dislikes.value)
+    // console.log(likeNumber)
+
+    // api
+    //   .put(`/posts/${form.elements.postId.value}/comments/${form.elements.id.value}`, {
+    //     likes: likeNumber + 1
+    //   })
+    //   .then(res => {
+    //     this.fetchPostings()
+    //   })
+    //   .catch(error => {
+    //     console.log(`Error adding likes to comment: ${error}`)
+    //   })
   }
 
   // Moved to storeMethods
@@ -305,6 +347,7 @@ class App extends Component {
                             addDislikes={this.addDislikes} 
                             createComment={this.createComment}
                             addLikesComment={this.addLikesComment}
+                            addDislikesComment={this.addDislikesComment}
                             deleteComment={this.deleteComment}
                             tokenDetails={tokenDetails.email}
                           />
