@@ -5,7 +5,22 @@ import Comments from "./Comments"
 import '../styles/Post.css'
 
 function Post (props) {
-  const { _id, title, content, created_by, created_at, likes, comments, dislikes, addLikes, addDislikes, createComment, deletePost} = props
+  const { 
+    _id, 
+    title, 
+    content, 
+    created_by, 
+    created_at, 
+    likes, 
+    comments, 
+    dislikes, 
+    addLikes, 
+    addDislikes, 
+    createComment, 
+    addLikesComment,
+    deleteComment,
+    deletePost
+  } = props
   
   let postTime = (new Date(created_at)).toLocaleString('en-GB', { hour12: true })
   
@@ -20,6 +35,7 @@ function Post (props) {
       <div className="editAndDeleteButtons">
         <button className="editButton" onClick={() => store.dispatch(setEditingAction(props))}>Edit Post</button>
         <button className="deleteButton" onClick={ () => store.dispatch({ type: 'delete_postings', id: _id }) }>Delete Post</button>
+        {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
       </div>
       <br />
 
@@ -47,7 +63,6 @@ function Post (props) {
       </div>
       <div className="postFeaturesRight">
         <p className="commentsCounter">Comments: { comments.length } </p>
-        {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
       </div>
       <br />
       <br />
@@ -65,7 +80,7 @@ function Post (props) {
       <div className="commentsArea">
         { 
           comments.length === 0 ? <p>There are no comments</p> : comments.map(comment => (
-            <Comments key={comment._id} {...comment} />
+            <Comments key={comment._id} {...comment} postId={_id} deleteComment={deleteComment} addLikesComment={addLikesComment} />
           ))
         }
       </div>

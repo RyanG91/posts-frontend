@@ -190,7 +190,9 @@ class App extends Component {
         comments: { 
           body: form.elements.comments.value,
           createdAt: Date.now(),
-          createdBy: tokenDetails.email
+          createdBy: tokenDetails.email,
+          likes: 0,
+          dislikes: 0
         }
       })
       .then(res => {
@@ -200,6 +202,28 @@ class App extends Component {
       .catch(error => {
         console.error(`Error updating post: ${error}`)
       })
+  }
+
+  deleteComment = (id, postId) => {
+    // console.log('this is a delete button')
+    // console.log(postId)
+    // console.log(id)
+    api
+      .delete(`/posts/${postId}/comments/${id}`)
+    const index = store.getState().posts.findIndex(comment => comment._id === id)
+
+    if (index >= 0) {
+      const posts = [...store.getState().posts]
+      posts.splice(index, 1)
+      store.dispatch({ type: 'set_posts', posts: posts })
+    }
+
+    this.fetchPostings()
+  }
+
+  addLikesComment = (event) => {
+    event.preventDefault()
+    console.log('test')
   }
 
   // Moved to storeMethods
@@ -273,7 +297,15 @@ class App extends Component {
                         <br />
                         <h2 className="mainTitle">Previous Posts</h2>
                         { posts.map((post) => 
-                          <Post key={post._id} {...post} addLikes={this.addLikes} addDislikes={this.addDislikes} createComment={this.createComment} />
+                          <Post 
+                            key={post._id} 
+                            {...post} 
+                            addLikes={this.addLikes} 
+                            addDislikes={this.addDislikes} 
+                            createComment={this.createComment}
+                            addLikesComment={this.addLikesComment}
+                            deleteComment={this.deleteComment}
+                          />
                         ).reverse()}
                       </Fragment>
                     )
