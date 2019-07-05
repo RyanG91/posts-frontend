@@ -234,16 +234,16 @@ class App extends Component {
     const likeNumber = Number(form.elements.likes.value)
     // console.log(likeNumber)
 
-    // api
-    //   .put(`/posts/${form.elements.postId.value}/comments/${form.elements.id.value}`, {
-    //     likes: likeNumber + 1
-    //   })
-    //   .then(res => {
-    //     this.fetchPostings()
-    //   })
-    //   .catch(error => {
-    //     console.log(`Error adding likes to comment: ${error}`)
-    //   })
+    api
+      .put(`/posts/${form.elements.postId.value}/comments/${form.elements.id.value}`, {
+        likes: likeNumber + 1
+      })
+      .then(res => {
+        this.fetchPostings()
+      })
+      .catch(error => {
+        console.log(`Error adding likes to comment: ${error}`)
+      })
   }
 
   addDislikesComment = (event) => {
@@ -254,19 +254,19 @@ class App extends Component {
 
     console.log(form)
 
-    const dislikesNumber = Number(form.elements.dislikes.value)
+    const dislikeNumber = Number(form.elements.dislikes.value)
     // console.log(likeNumber)
 
-    // api
-    //   .put(`/posts/${form.elements.postId.value}/comments/${form.elements.id.value}`, {
-    //     likes: likeNumber + 1
-    //   })
-    //   .then(res => {
-    //     this.fetchPostings()
-    //   })
-    //   .catch(error => {
-    //     console.log(`Error adding likes to comment: ${error}`)
-    //   })
+    api
+      .put(`/posts/${form.elements.postId.value}/comments/${form.elements.id.value}`, {
+        dislikes: dislikeNumber + 1
+      })
+      .then(res => {
+        this.fetchPostings()
+      })
+      .catch(error => {
+        console.log(`Error adding likes to comment: ${error}`)
+      })
   }
 
   // Moved to storeMethods
