@@ -20,6 +20,7 @@ function Post (props) {
     addLikesComment,
     deleteComment,
     tokenDetails,
+    addDislikesComment,
     deletePost
   } = props
   
@@ -57,8 +58,8 @@ function Post (props) {
       </div>
       <div className="postFeatures">
         <form onSubmit={addDislikes}>
-          <input type="hidden" name="dislikes" value={dislikes} />      
-          <input type="hidden" name="id" value={_id} />      
+          <input type="hidden" name="dislikes" value={dislikes} />
+          <input type="hidden" name="id" value={_id} />
           <button className="postFeaturesButton" type="submit">Dislike</button>
         </form>
       </div>
@@ -90,6 +91,7 @@ function Post (props) {
               postId={_id} 
               deleteComment={deleteComment} 
               addLikesComment={addLikesComment}
+              addDislikesComment={addDislikesComment}
               tokenDetails={tokenDetails}
             />
           ))

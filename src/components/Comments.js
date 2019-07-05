@@ -8,21 +8,22 @@ import "../styles/Comments.css"
 function Comments(props) {
 
   const { 
-    _id, 
-    postId, 
-    body, 
+    _id,
+    postId,
+    body,
     tokenDetails,
-    createdBy, 
-    createdAt, 
-    likes, 
-    dislikes, 
-    deleteComment, 
-    addLikesComment, 
+    createdBy,
+    createdAt,
+    likes,
+    dislikes,
+    deleteComment,
+    addLikesComment,
+    addDislikesComment
   } = props
 
   let commentTime = (new Date(createdAt)).toLocaleString('en-GB', { hour12: true })
 
-  console.log(postId)
+  // console.log(postId)
 
   if (body === null) {
     return (
@@ -39,13 +40,35 @@ function Comments(props) {
         { 
           tokenDetails === createdBy ?
             <div>
-              <button >Edit Comment</button>
-              <button onClick={ () => {deleteComment(_id, postId)} } >Delete Comment</button>
+              <button className="editComment">Edit Comment</button>
+              <button className="deleteComment" onClick={ () => {deleteComment(_id, postId)} } >Delete Comment</button>
             </div>
           :
             <p></p>
         }
         <br />
+        <div>
+          <form onSubmit={addLikesComment}>
+            <input type="hidden" name="likes" value={likes} />
+            <input type="hidden" name="id" value={_id} />
+            <input type="hidden" name="postId" value={postId} />
+            <button type="submit">Like</button>
+          </form>
+        </div>
+        <div>
+          <p>Likes: {likes}</p>
+        </div>
+        <div>
+          <form onSubmit={addDislikesComment}>
+            <input type="hidden" name="dislikes" value={dislikes} />
+            <input type="hidden" name="id" value={_id} />
+            <input type="hidden" name="postId" value={postId} />
+            <button>Dislike</button>
+          </form>
+        </div>
+        <div>
+          <p>Dislikes: {dislikes}</p>
+        </div>
       </div>
     )
   }
