@@ -19,6 +19,7 @@ function Post (props) {
     createComment, 
     addLikesComment,
     deleteComment,
+    tokenDetails,
     deletePost
   } = props
   
@@ -32,11 +33,14 @@ function Post (props) {
       <p className="createdByAndAt"><strong>{ created_by }</strong> says at <strong>{ postTime }</strong></p>
       <h4 className="postTitle">{ title }</h4>
       <p className="postContent">{ content }</p>
-      <div className="editAndDeleteButtons">
-        <button className="editButton" onClick={() => store.dispatch(setEditingAction(props))}>Edit Post</button>
-        <button className="deleteButton" onClick={ () => store.dispatch({ type: 'delete_postings', id: _id }) }>Delete Post</button>
-        {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
-      </div>
+      { tokenDetails === created_by ?
+        <div className="editAndDeleteButtons">
+          <button className="editButton" onClick={() => store.dispatch(setEditingAction(props))}>Edit Post</button>
+          <button className="deleteButton" onClick={ () => store.dispatch({ type: 'delete_postings', id: _id }) }>Delete Post</button>
+          {/* <button onClick={ () => {deletePost(_id)} }>Delete Post</button> */}
+        </div> :
+        <p></p>
+      }
       <br />
 
 {/* Post features */}
@@ -80,7 +84,14 @@ function Post (props) {
       <div className="commentsArea">
         { 
           comments.length === 0 ? <p>There are no comments</p> : comments.map(comment => (
-            <Comments key={comment._id} {...comment} postId={_id} deleteComment={deleteComment} addLikesComment={addLikesComment} />
+            <Comments 
+              key={comment._id} 
+              {...comment} 
+              postId={_id} 
+              deleteComment={deleteComment} 
+              addLikesComment={addLikesComment}
+              tokenDetails={tokenDetails}
+            />
           ))
         }
       </div>
