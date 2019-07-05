@@ -217,8 +217,9 @@ class App extends Component {
       posts.splice(index, 1)
       store.dispatch({ type: 'set_posts', posts: posts })
     }
-
+    
     this.fetchPostings()
+
   }
 
   addLikesComment = (event) => {
@@ -305,6 +306,7 @@ class App extends Component {
                             createComment={this.createComment}
                             addLikesComment={this.addLikesComment}
                             deleteComment={this.deleteComment}
+                            tokenDetails={tokenDetails.email}
                           />
                         ).reverse()}
                       </Fragment>
