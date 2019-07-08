@@ -47,27 +47,27 @@ function Comments(props) {
             <p></p>
         }
         <br />
-        <div>
+        <div className="commentFeatures">
           <form onSubmit={addLikesComment}>
             <input type="hidden" name="likes" value={likes} />
             <input type="hidden" name="id" value={_id} />
             <input type="hidden" name="postId" value={postId} />
-            <button type="submit">Like</button>
+            <button className="postFeaturesButton" type="submit">Like</button>
           </form>
         </div>
-        <div>
-          <p>Likes: {likes}</p>
+        <div className="commentFeatures">
+          <p className="likeCommentCounter">Likes: {likes}</p>
         </div>
-        <div>
+        <div className="commentFeatures">
           <form onSubmit={addDislikesComment}>
             <input type="hidden" name="dislikes" value={dislikes} />
             <input type="hidden" name="id" value={_id} />
             <input type="hidden" name="postId" value={postId} />
-            <button>Dislike</button>
+            <button className="postFeaturesButton" type="submit">Dislike</button>
           </form>
         </div>
-        <div>
-          <p>Dislikes: {dislikes}</p>
+        <div className="commentFeatures">
+          <p className="dislikeCommentCounter">Dislikes: {dislikes}</p>
         </div>
       </div>
     )
