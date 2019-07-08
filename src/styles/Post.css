@@ -111,3 +111,30 @@
 }
 
 /* Comments part */
+
+.commentButton {
+  position: relative;
+  top: 10px;
+  border-radius: 28px;
+  padding: 4px 10px;
+  background-color: #2E0854;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  transition-duration: 0.4s;
+  outline: 0;
+}
+
+.commentButton:hover {
+  background-color: white;
+  border-color: #2E0854;
+  color: black;
+}
+
+.commentBox {
+  position: relative;
+  border-collapse: separate;
+  border-radius: 28px;
+  outline: 0;
+  width: 50%;
+  padding: 3px 3px;
+}

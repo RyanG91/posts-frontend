@@ -70,15 +70,14 @@ function Post (props) {
         <p className="commentsCounter">Comments: { comments.length } </p>
       </div>
       <br />
-      <br />
-      <br />
 
 {/* Comments section */}
 
       <form onSubmit={createComment}>
-        <input type="text" name="comments" placeholder="150 characters max" maxLength="150" />
+        <input className="commentBox" type="text" name="comments" placeholder="150 characters max" maxLength="150" />
         <input type="hidden" name="id" value={_id} />
-        <button className="postFeaturesButton" type="submit">Create comment</button>
+        <br />
+        <button className="commentButton" type="submit">Create comment</button>
       </form>
       <br />
       <h4 className="commentsTitle">Comments</h4>
