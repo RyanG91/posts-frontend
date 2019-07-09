@@ -10,7 +10,8 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import Post from './components/Post'
 import store from './config/store'
 import EditPostForm from './components/EditPostForm';
-import { setEditingAction } from './config/actions'
+import EditCommentForm from './components/EditCommentForm'
+import { setEditingAction, setEditCommentAction } from './config/actions'
 
 class App extends Component {
   get token() {
@@ -267,6 +268,48 @@ class App extends Component {
       })
   }
 
+  editComment = (event, postId) => {
+    event.preventDefault()
+
+    const form = event.target
+
+    console.log(form)
+    // console.log(id)
+    // console.log(postId)
+
+    api
+      .put(`/posts/${form.elements.postId.value}/comments/${form.elements.id.value}`, {
+        _id: form.elements.id.value,
+        comment: form.elements.comment.value
+    })
+    .then(res => {
+      this.fetchPostings()
+      store.dispatch(setEditCommentAction(null))
+    })
+    .catch(error => {
+      console.error(`Error updating post: ${error}`)
+    })
+
+  }
+
+  // editPosts = (event) => {
+  //   event.preventDefault()
+  //   const form = event.target
+  //   api
+  //     .put(`/posts/${form.elements.id.value}`, {
+  //       _id: form.elements.id.value,
+  //       title: form.elements.title.value,
+  //       content: form.elements.content.value
+  //     })
+  //     .then(res => {
+  //       this.fetchPostings()
+  //       store.dispatch(setEditingAction(null))
+  //     })
+  //     .catch(error => {
+  //       console.error(`Error updating post: ${error}`)
+  //     })
+  // }
+
   // Moved to storeMethods
   // deletePost = (id) => {
   //   api.delete(`/posts/${id}`)
@@ -321,6 +364,12 @@ class App extends Component {
                     return (
                       <EditPostForm key={post._id} post={post} editPosts={this.editPosts} removeEdit={this.removeEdit} />
                     )
+                  } else if (store.getState().editComment) {
+                    let comment = store.getState().editComment
+                    console.log(comment)
+                    return (
+                      <EditCommentForm key={comment._id} comment={comment} editComment={this.editComment} />
+                    )                    
                   } else {
                     return (
                       <Fragment>
@@ -347,6 +396,7 @@ class App extends Component {
                             addLikesComment={this.addLikesComment}
                             addDislikesComment={this.addDislikesComment}
                             deleteComment={this.deleteComment}
+                            editComment={this.editComment}
                             tokenDetails={tokenDetails.email}
                           />
                         ).reverse()}
