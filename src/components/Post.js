@@ -43,7 +43,6 @@ function Post (props) {
         </div> :
         <p></p>
       }
-      {/* <br /> */}
 
 {/* Post features */}
 
@@ -95,14 +94,11 @@ function Post (props) {
               tokenDetails={tokenDetails}
               editComment={editComment}
             />
-          ))
+          )).reverse()
         }
       </div>
-
     </div> 
   )
 }
-
-
 
 export default Post
