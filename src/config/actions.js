@@ -4,3 +4,10 @@ export function setEditingAction(editing) {
     editing
   }
 }
+
+export function setEditCommentAction(editComment) {
+  return {
+    type: "set_editComment",
+    editComment
+  }
+}

@@ -21,6 +21,7 @@ function Post (props) {
     deleteComment,
     tokenDetails,
     addDislikesComment,
+    editComment,
     deletePost
   } = props
   
@@ -92,6 +93,7 @@ function Post (props) {
               addLikesComment={addLikesComment}
               addDislikesComment={addDislikesComment}
               tokenDetails={tokenDetails}
+              editComment={editComment}
             />
           ))
         }

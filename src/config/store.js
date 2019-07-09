@@ -8,6 +8,7 @@ const initialState = {
   loggedIn: false,
   loginError: null,
   editing: null,
+  editComment: null,
   registerSuccess: null,
   registerError: null
 }
@@ -43,6 +44,10 @@ const reducer = (state, action) => {
       return deletePosts(state, action)
     case "set_editing":
       return { ...state, editing: action.editing }
+
+    // Edit comments
+    case "set_editComment":
+      return { ...state, editComment: action.editComment }
 
     default:
       console.log(`Redux reducer: Action ${action.type} does not exist`)

@@ -1,9 +1,8 @@
 import React from "react"
 import api from '../api/init'
-
+import store from '../config/store'
+import { setEditCommentAction } from '../config/actions'
 import "../styles/Comments.css"
-
-
 
 function Comments(props) {
 
@@ -18,6 +17,7 @@ function Comments(props) {
     dislikes,
     deleteComment,
     addLikesComment,
+    editComment,
     addDislikesComment
   } = props
 
@@ -40,7 +40,7 @@ function Comments(props) {
         { 
           tokenDetails === createdBy ?
             <div className="editAndDeleteComments">
-              <button className="editComment">Edit Comment</button>
+              <button className="editComment" onClick={ () => {store.dispatch(setEditCommentAction(props))} } >Edit Comment</button>
               <button className="deleteComment" onClick={ () => {deleteComment(_id, postId)} } >Delete Comment</button>
             </div>
           :
