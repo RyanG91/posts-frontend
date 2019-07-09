@@ -248,11 +248,9 @@ class App extends Component {
 
   addDislikesComment = (event) => {
     event.preventDefault()
-    console.log('test')
-
+    // console.log('test')
     const form = event.target
-
-    console.log(form)
+    // console.log(form)
 
     const dislikeNumber = Number(form.elements.dislikes.value)
     // console.log(likeNumber)

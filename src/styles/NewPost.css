@@ -28,8 +28,13 @@
   /* border-radius: 28px;
   padding: 6px 5px; */
 
+  position: relative;
   width: 50%;
   border-color: #9B30FF;
+  border-collapse: separate;
+  border-radius: 28px;
+  outline: 0;
+  padding: 3px 3px;
 }
 
 .contentBox {
@@ -41,4 +46,7 @@
   min-height:50px;
   max-height:200px;
   border-color: #9B30FF;
+  border-radius: 28px;
+  padding: 1%;
+  outline: 0;
 }
