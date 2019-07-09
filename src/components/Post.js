@@ -42,7 +42,7 @@ function Post (props) {
         </div> :
         <p></p>
       }
-      <br />
+      {/* <br /> */}
 
 {/* Post features */}
 

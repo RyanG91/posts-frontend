@@ -36,17 +36,17 @@ function Comments(props) {
       <div className="commentsSection">
         <p><strong>{createdBy}</strong> commented at: {commentTime} </p>
         <p>{body}</p>
-        <br />
+        {/* <br /> */}
         { 
           tokenDetails === createdBy ?
-            <div>
+            <div className="editAndDeleteComments">
               <button className="editComment">Edit Comment</button>
               <button className="deleteComment" onClick={ () => {deleteComment(_id, postId)} } >Delete Comment</button>
             </div>
           :
             <p></p>
         }
-        <br />
+        {/* <br /> */}
         <div className="commentFeatures">
           <form onSubmit={addLikesComment}>
             <input type="hidden" name="likes" value={likes} />
