@@ -207,9 +207,6 @@ class App extends Component {
 
   // Deletes a Comment based on its id and the post ID
   deleteComment = (id, postId) => {
-    // console.log('this is a delete button')
-    // console.log(postId)
-    // console.log(id)
     api
       .delete(`/posts/${postId}/comments/${id}`)
     const index = store.getState().posts.findIndex(comment => comment._id === id)
@@ -224,16 +221,12 @@ class App extends Component {
 
   }
 
+  // Adds a like for comments
   addLikesComment = (event) => {
     event.preventDefault()
-    // console.log('test')
-
     const form = event.target
 
-    // console.log(form)
-
     const likeNumber = Number(form.elements.likes.value)
-    // console.log(likeNumber)
 
     api
       .put(`/posts/${form.elements.postId.value}/comments/${form.elements.id.value}`, {
@@ -247,14 +240,12 @@ class App extends Component {
       })
   }
 
+  // Adds a dislike for comments
   addDislikesComment = (event) => {
     event.preventDefault()
-    // console.log('test')
     const form = event.target
-    // console.log(form)
 
     const dislikeNumber = Number(form.elements.dislikes.value)
-    // console.log(likeNumber)
 
     api
       .put(`/posts/${form.elements.postId.value}/comments/${form.elements.id.value}`, {
@@ -268,14 +259,10 @@ class App extends Component {
       })
   }
 
-  editComment = (event, postId) => {
+  // Edits a comment based on its id
+  editComment = (event) => {
     event.preventDefault()
-
     const form = event.target
-
-    console.log(form)
-    // console.log(id)
-    // console.log(postId)
 
     api
       .put(`/posts/${form.elements.postId.value}/comments/${form.elements.id.value}`, {
@@ -289,26 +276,12 @@ class App extends Component {
     .catch(error => {
       console.error(`Error updating post: ${error}`)
     })
-
   }
 
-  // editPosts = (event) => {
-  //   event.preventDefault()
-  //   const form = event.target
-  //   api
-  //     .put(`/posts/${form.elements.id.value}`, {
-  //       _id: form.elements.id.value,
-  //       title: form.elements.title.value,
-  //       content: form.elements.content.value
-  //     })
-  //     .then(res => {
-  //       this.fetchPostings()
-  //       store.dispatch(setEditingAction(null))
-  //     })
-  //     .catch(error => {
-  //       console.error(`Error updating post: ${error}`)
-  //     })
-  // }
+  removeEditComment = () => {
+    this.fetchPostings()
+    store.dispatch(setEditCommentAction(null))
+  }
 
   // Moved to storeMethods
   // deletePost = (id) => {
@@ -368,7 +341,12 @@ class App extends Component {
                     let comment = store.getState().editComment
                     console.log(comment)
                     return (
-                      <EditCommentForm key={comment._id} comment={comment} editComment={this.editComment} />
+                      <EditCommentForm 
+                        key={comment._id} 
+                        comment={comment} 
+                        editComment={this.editComment}
+                        removeEditComment={this.removeEditComment}
+                      />
                     )                    
                   } else {
                     return (
